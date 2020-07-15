@@ -50,7 +50,6 @@
 - Node.js
 - GraphQL
 - GraphQL-Apollo Server
-- TypeORM
 - mongoose
 
 ### Features
