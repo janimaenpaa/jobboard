@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require("apollo-server");
+const { v4 } = require("uuid");
 
 let posts = [
   {
@@ -57,9 +58,28 @@ const typeDefs = gql`
     state: allowedState!
   }
 
+  input TechInput {
+    required: [String]
+    recommended: [String]
+  }
+
   type Query {
     postCount: Int!
     allPosts: [Post!]!
+  }
+
+  type Mutation {
+    addPost(
+      title: String!
+      company: String!
+      recruiter: String!
+      description: String!
+      location: String!
+      published: String!
+      deadline: String
+      techs: TechInput
+      link: String!
+    ): Post
   }
 `;
 
@@ -67,6 +87,13 @@ const resolvers = {
   Query: {
     postCount: () => posts.length,
     allPosts: () => posts,
+  },
+  Mutation: {
+    addPost: (root, args) => {
+      const post = { ...args, id: v4(), state: "WAITING" };
+      posts = posts.concat(post);
+      return post;
+    },
   },
 };
 
