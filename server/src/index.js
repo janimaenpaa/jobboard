@@ -42,6 +42,7 @@ const typeDefs = gql`
     WAITING
     ACCEPTED
     HIDDEN
+    PINNED
   }
 
   type Post {

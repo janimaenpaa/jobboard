@@ -6,5 +6,7 @@
 | 15.7. | 1    | Backendin conffaaminen                                           |
 |       | 2    | Dummy-datan, ApolloServerin, tyypityksen ja resolverien luominen |
 |       | 2    | Frontendin konfigurointi, UI:n alustaminen, GraphQL-kysely       |
-|       | 1    | GraphQL:n dokumentaation selailu, mutaation lisäys backendiin    |
-|  yht  | 7    |                                                                  |
+| 16.7. | 1    | GraphQL:n dokumentaation selailu, mutaation lisäys backendiin    |
+| 17.7. | 1    | React Hook Formiin tutustumista ja kokeilua                      |
+|       | 2    | Frontendin lomakkeen tekoa ja tyylittelyä                        |
+|  yht  | 11   |                                                                  |
