@@ -17,6 +17,48 @@ type FormData = {
 
 const Container = styled.div`
   padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-width: 1200px;
+`;
+
+const Form = styled.form`
+  width: 400px;
+  margin: 0 auto;
+`;
+
+const Label = styled.label`
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-top: 10px;
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+const Input = styled.input`
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 6px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
+`;
+
+const Button = styled.button`
+  display: block;
+  background: #bf1650;
+  color: white;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
 `;
 
 const NewPost: React.FC = () => {
@@ -28,45 +70,45 @@ const NewPost: React.FC = () => {
   return (
     <Container>
       <h2>New</h2>
-      <form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <div>
-          <label>Job Title</label>
-          <input name="title" ref={register} />
+          <Label>Job Title</Label>
+          <Input name="title" ref={register} />
         </div>
         <div>
-          <label>Company</label>
-          <input name="company" ref={register} />
+          <Label>Company</Label>
+          <Input name="company" ref={register} />
         </div>
         <div>
-          <label>Recruiter</label>
-          <input name="recruiter" ref={register} />
+          <Label>Recruiter</Label>
+          <Input name="recruiter" ref={register} />
         </div>
         <div>
-          <label>Description</label>
-          <input name="description" ref={register} />
+          <Label>Description</Label>
+          <Input name="description" ref={register} />
         </div>
         <div>
-          <label>Location</label>
-          <input name="location" ref={register} />
+          <Label>Location</Label>
+          <Input name="location" ref={register} />
         </div>
         <div>
-          <label>Deadline</label>
-          <input name="deadline" ref={register} />
+          <Label>Deadline</Label>
+          <Input name="deadline" ref={register} />
         </div>
         <div>
-          <label>Required technologies</label>
-          <input name="requiredTechs" ref={register} />
+          <Label>Required technologies</Label>
+          <Input name="requiredTechs" ref={register} />
         </div>
         <div>
-          <label>Recommended technologies</label>
-          <input name="recommendedTechs" ref={register} />
+          <Label>Recommended technologies</Label>
+          <Input name="recommendedTechs" ref={register} />
         </div>
         <div>
-          <label>Link for applying</label>
-          <input name="applyLink" ref={register} />
+          <Label>Link for applying</Label>
+          <Input name="applyLink" ref={register} />
         </div>
-        <input type="submit" />
-      </form>
+        <Button type="submit">Submit</Button>
+      </Form>
     </Container>
   );
 };
