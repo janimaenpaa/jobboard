@@ -9,4 +9,5 @@
 | 16.7. | 1    | GraphQL:n dokumentaation selailu, mutaation lisäys backendiin    |
 | 17.7. | 1    | React Hook Formiin tutustumista ja kokeilua                      |
 |       | 2    | Frontendin lomakkeen tekoa ja tyylittelyä                        |
-|  yht  | 11   |                                                                  |
+| 20.7. | 3    | Skeeman päivitystä, mutaation lisääminen lomakkeeseen            |
+|  yht  | 14   |                                                                  |
