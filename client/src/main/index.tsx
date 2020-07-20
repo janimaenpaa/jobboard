@@ -1,37 +1,38 @@
-import React, { FC } from "react";
-import { gql, useQuery } from "@apollo/client";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import styled from "styled-components";
-import JobList from "./JobList";
-import "antd/dist/antd.css";
+import React, { FC } from "react"
+import { gql, useQuery } from "@apollo/client"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import styled, { ThemeProvider } from "styled-components"
+import JobList from "./JobList"
+import "antd/dist/antd.css"
+import { GlobalStyles } from "./global"
+import { theme } from "./theme"
 
-import { ALL_POSTS } from "./queries";
-import NewPost from "./NewPost";
-
-const Container = styled.div`
-  body: 0;
-  margin: 0;
-`;
+import { ALL_POSTS } from "./queries"
+import NewPost from "./NewPost"
+import NavBar from "./components/NavBar"
 
 const Main: FC = () => {
-  const { error, loading, data } = useQuery(ALL_POSTS);
-  console.log(data);
+  const { error, loading, data } = useQuery(ALL_POSTS)
+  console.log(data)
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
     <Router>
-      <Container>
-        <h2 style={{ padding: 10 }}>JobBoard</h2>
-      <Switch>
-        <Route path="/new" render={() => <NewPost />} />
-        <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
-      </Switch>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <>
+          <NavBar title="JobBoard" />
+          <GlobalStyles />
+          <Switch>
+            <Route path="/new" render={() => <NewPost />} />
+            <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
+          </Switch>
+        </>
+      </ThemeProvider>
     </Router>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

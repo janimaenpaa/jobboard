@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-import { ADD_POST, ALL_POSTS } from "../queries";
+import React, { useState } from "react"
+import { gql, useMutation } from "@apollo/client"
+import { useForm } from "react-hook-form"
+import styled from "styled-components"
+import { ADD_POST, ALL_POSTS } from "../queries"
 
 const Container = styled.div`
-  padding: 20px;
-  border-radius: 10px;
-  margin: 0 auto;
-  max-width: 1200px;
-`;
+  margin: 60px 60px;
+`
 
 const Form = styled.form`
   width: 400px;
   margin: 0 auto;
-`;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+`
 
 const Label = styled.label`
   line-height: 2;
@@ -24,7 +24,7 @@ const Label = styled.label`
   color: black;
   font-size: 14px;
   font-weight: 400;
-`;
+`
 
 const Input = styled.input`
   display: block;
@@ -35,7 +35,7 @@ const Input = styled.input`
   padding: 6px 15px;
   margin-bottom: 10px;
   font-size: 14px;
-`;
+`
 
 const Button = styled.button`
   display: block;
@@ -48,24 +48,24 @@ const Button = styled.button`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
-`;
+`
 
 type FormData = {
-  title: string;
-  company: string;
-  recruiter: string;
-  description: string;
-  location: string;
-  deadline: String;
-  link: string;
-};
+  title: string
+  company: string
+  recruiter: string
+  description: string
+  location: string
+  deadline: String
+  link: string
+}
 
 const NewPost: React.FC = () => {
-  const { register, setValue, handleSubmit, errors } = useForm<FormData>();
+  const { register, setValue, handleSubmit, errors } = useForm<FormData>()
 
   const [createPost] = useMutation(ADD_POST, {
     refetchQueries: [{ query: ALL_POSTS }],
-  });
+  })
 
   const onSubmit = handleSubmit(
     ({ title, company, recruiter, description, location, deadline, link }) => {
@@ -77,7 +77,7 @@ const NewPost: React.FC = () => {
         location,
         deadline,
         link,
-      });
+      })
       createPost({
         variables: {
           title,
@@ -88,9 +88,9 @@ const NewPost: React.FC = () => {
           deadline,
           link,
         },
-      });
+      })
     }
-  );
+  )
 
   return (
     <Container>
@@ -127,7 +127,7 @@ const NewPost: React.FC = () => {
         <Button type="submit">Submit</Button>
       </Form>
     </Container>
-  );
-};
+  )
+}
 
-export default NewPost;
+export default NewPost
