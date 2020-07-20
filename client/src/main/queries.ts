@@ -11,12 +11,39 @@ export const ALL_POSTS = gql`
       location
       published
       deadline
-      techs {
-        required
-        recommended
-      }
       link
       state
     }
   }
+`;
+
+export const ADD_POST = gql`
+mutation addPost(
+  $title: String!
+  $company: String!
+  $recruiter: String!
+  $description: String!
+  $location: String!
+  $deadline: String
+  $link: String!
+) {
+    addPost(
+        title: $title
+        company: $company
+        recruiter: $recruiter
+        description: $description
+        location: $location
+        deadline: $deadline
+        link: $link
+    ) {
+        id
+        title
+        company
+        recruiter
+        description
+        location
+        deadline
+        link
+    }
+}
 `;

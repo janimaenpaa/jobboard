@@ -9,7 +9,6 @@ import { ALL_POSTS } from "./queries";
 import NewPost from "./NewPost";
 
 const Container = styled.div`
-  background: yellow;
   body: 0;
   margin: 0;
 `;

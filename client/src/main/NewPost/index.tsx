@@ -1,19 +1,8 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-
-type FormData = {
-  title: string;
-  company: string;
-  recruiter: string;
-  description: string;
-  location: string;
-  deadline: String;
-  requiredTechs: string;
-  recommendedTechs: string;
-  link: string;
-};
+import { ADD_POST, ALL_POSTS } from "../queries";
 
 const Container = styled.div`
   padding: 20px;
@@ -61,11 +50,47 @@ const Button = styled.button`
   font-size: 14px;
 `;
 
+type FormData = {
+  title: string;
+  company: string;
+  recruiter: string;
+  description: string;
+  location: string;
+  deadline: String;
+  link: string;
+};
+
 const NewPost: React.FC = () => {
   const { register, setValue, handleSubmit, errors } = useForm<FormData>();
-  const onSubmit = handleSubmit(({ title, company, description }) => {
-    console.log(title, company, description);
+
+  const [createPost] = useMutation(ADD_POST, {
+    refetchQueries: [{ query: ALL_POSTS }],
   });
+
+  const onSubmit = handleSubmit(
+    ({ title, company, recruiter, description, location, deadline, link }) => {
+      console.log({
+        title,
+        company,
+        recruiter,
+        description,
+        location,
+        deadline,
+        link,
+      });
+      createPost({
+        variables: {
+          title,
+          company,
+          recruiter,
+          description,
+          location,
+          deadline,
+          link,
+        },
+      });
+    }
+  );
 
   return (
     <Container>
@@ -96,16 +121,8 @@ const NewPost: React.FC = () => {
           <Input name="deadline" ref={register} />
         </div>
         <div>
-          <Label>Required technologies</Label>
-          <Input name="requiredTechs" ref={register} />
-        </div>
-        <div>
-          <Label>Recommended technologies</Label>
-          <Input name="recommendedTechs" ref={register} />
-        </div>
-        <div>
           <Label>Link for applying</Label>
-          <Input name="applyLink" ref={register} />
+          <Input name="link" ref={register} />
         </div>
         <Button type="submit">Submit</Button>
       </Form>

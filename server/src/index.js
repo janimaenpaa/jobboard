@@ -12,7 +12,6 @@ let posts = [
     location: "Helsinki",
     published: "15-7-2020",
     deadline: "30-7-2020",
-    techs: { required: ["React"], recommended: ["GraphQL"] },
     link: "https://reactjs.org",
     state: "WAITING",
   },
@@ -26,17 +25,12 @@ let posts = [
     location: "Helsinki",
     published: "15-7-2020",
     deadline: "30-7-2020",
-    techs: { required: ["React"], recommended: ["GraphQL"] },
     link: "https://reactjs.org",
     state: "ACCEPTED",
   },
 ];
 
 const typeDefs = gql`
-  type Techs {
-    required: [String]
-    recommended: [String]
-  }
 
   enum allowedState {
     WAITING
@@ -54,14 +48,8 @@ const typeDefs = gql`
     location: String!
     published: String!
     deadline: String
-    techs: Techs
     link: String!
     state: allowedState!
-  }
-
-  input TechInput {
-    required: [String]
-    recommended: [String]
   }
 
   type Query {
@@ -76,9 +64,7 @@ const typeDefs = gql`
       recruiter: String!
       description: String!
       location: String!
-      published: String!
       deadline: String
-      techs: TechInput
       link: String!
     ): Post
   }
@@ -91,7 +77,12 @@ const resolvers = {
   },
   Mutation: {
     addPost: (root, args) => {
-      const post = { ...args, id: v4(), state: "WAITING" };
+      const post = {
+        ...args,
+        id: v4(),
+        state: "WAITING",
+        published: String(new Date().getDate())
+      };
       posts = posts.concat(post);
       return post;
     },
