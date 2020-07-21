@@ -9,10 +9,11 @@ interface Props {
 const Bar = styled.div`
   display: flex;
   position: fixed;
+  top: 0;
   background-color: black;
   width: 100%;
   z-index: 99;
-  margin-bottom: 30px;
+  align-items: center;
 `
 
 const Title = styled.div`
@@ -22,6 +23,7 @@ const Title = styled.div`
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 20px;
 `
 
 const RecruiterLink = styled.div`
@@ -40,6 +42,9 @@ const NavBar: React.FC<Props> = ({ title }) => (
       <Title>{title}</Title>
     </Link>
     <Link to="/new">
+      <RecruiterLink>New</RecruiterLink>
+    </Link>
+    <Link to="/recruiter">
       <RecruiterLink>Recruiters</RecruiterLink>
     </Link>
   </Bar>

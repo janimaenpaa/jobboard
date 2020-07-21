@@ -5,15 +5,16 @@ import styled from "styled-components"
 import { ADD_POST, ALL_POSTS } from "../queries"
 
 const Container = styled.div`
-  margin: 60px 60px;
+  display: flex;
+  justify-content: center;
 `
-
 const Form = styled.form`
+  flex-direction: column;
   width: 400px;
-  margin: 0 auto;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
+  margin-top: 5rem;
 `
 
 const Label = styled.label`
@@ -33,7 +34,6 @@ const Input = styled.input`
   border-radius: 4px;
   border: 1px solid black;
   padding: 6px 15px;
-  margin-bottom: 10px;
   font-size: 14px;
 `
 
@@ -47,6 +47,7 @@ const Button = styled.button`
   border: 1px solid white;
   padding: 10px 15px;
   margin-bottom: 10px;
+  margin-top: 6px;
   font-size: 14px;
 `
 
@@ -94,8 +95,8 @@ const NewPost: React.FC = () => {
 
   return (
     <Container>
-      <h2>New</h2>
       <Form onSubmit={onSubmit}>
+        <h2>New</h2>
         <div>
           <Label>Job Title</Label>
           <Input name="title" ref={register} />
