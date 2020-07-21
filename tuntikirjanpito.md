@@ -11,4 +11,5 @@
 |       | 2    | Frontendin lomakkeen tekoa ja tyylittelyä                          |
 | 20.7. | 3    | Skeeman päivitystä, mutaation lisääminen lomakkeeseen, debuggausta |
 |       | 2    | Käyttöliittymän päivitystä                                         |
-|  yht  | 16   |                                                                    |
+| 21.7. | 3    | Frontendin uusien näkymien tekoa, tyylien säätelyä                 |
+|  yht  | 19   |                                                                    |
