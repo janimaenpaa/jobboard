@@ -7,6 +7,7 @@ import { GlobalStyles } from "./global"
 import { theme } from "./theme"
 
 import JobList from "./JobList"
+import RecruiterPage from "./RecruiterPage"
 import { ALL_POSTS } from "./queries"
 import NewPost from "./NewPost"
 import NavBar from "./components/NavBar"
@@ -27,6 +28,7 @@ const Main: FC = () => {
           <GlobalStyles />
           <Switch>
             <Route path="/new" render={() => <NewPost />} />
+            <Route path="/recruiter" render={() => <RecruiterPage />} />
             <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
           </Switch>
         </>
