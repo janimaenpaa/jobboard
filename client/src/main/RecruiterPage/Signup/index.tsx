@@ -6,6 +6,9 @@ const Form = styled.form`
   flex-direction: column;
   width: 50%;
   padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 5rem;
 `
 
 const Label = styled.label`
@@ -26,6 +29,7 @@ const Input = styled.input`
   border: 1px solid black;
   padding: 6px 15px;
   font-size: 14px;
+  color: black;
 `
 
 const Button = styled.button`
@@ -43,25 +47,35 @@ const Button = styled.button`
 `
 
 type FormData = {
+  firstName: string
+  lastName: string
+  company: string
   email: string
   password: string
+  passwordAgain: string
 }
 
-interface Props {}
-
-const Login = (props: Props) => {
+const Signup = () => {
   const { register, handleSubmit } = useForm<FormData>()
   const onSubmit = (data: any) => console.log(data)
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Login</h2>
+      <h2>Signup</h2>
+      <Label>First name</Label>
+      <Input name="firstName" ref={register} />
+      <Label>Last name</Label>
+      <Input name="lastName" ref={register} />
+      <Label>Company</Label>
+      <Input name="company" ref={register} />
       <Label>Email</Label>
       <Input name="email" ref={register} />
       <Label>Password</Label>
       <Input type="password" name="password" ref={register} />
-      <Button type="submit">Login</Button>
+      <Label>Password again</Label>
+      <Input type="password" name="passwordAgain" ref={register} />
+      <Button type="submit">Signup</Button>
     </Form>
   )
 }
 
-export default Login
+export default Signup
