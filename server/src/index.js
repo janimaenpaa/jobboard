@@ -76,6 +76,7 @@ const typeDefs = gql`
     postCount: Int!
     userCount: Int!
     allPosts: [Post!]!
+    findPost(id: String): Post!
   }
 
   type Mutation {
@@ -96,17 +97,23 @@ const resolvers = {
     postCount: () => Post.collection.countDocuments(),
     userCount: () => User.collection.countDocuments(),
     allPosts: () => Post.find({}),
+    findPost: async (root, args) => {
+      if (!args.id) {
+        throw new UserInputError(error.message, { invalidArgs: args })
+      }
+
+      try {
+        const post = await Post.findById(args.id)
+        return post
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+    },
   },
   Mutation: {
     addPost: async (root, args) => {
-      /* const post = {
-        ...args,
-        id: v4(),
-        state: "WAITING",
-        published: String(new Date().getDate()),
-      }
-      posts = posts.concat(post)
-      return post */
       const date = {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
