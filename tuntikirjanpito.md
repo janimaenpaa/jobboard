@@ -12,4 +12,6 @@
 | 20.7. | 3    | Skeeman päivitystä, mutaation lisääminen lomakkeeseen, debuggausta |
 |       | 2    | Käyttöliittymän päivitystä                                         |
 | 21.7. | 3    | Frontendin uusien näkymien tekoa, tyylien säätelyä                 |
-|  yht  | 19   |                                                                    |
+| 22.7. | 1    | Backendin yhdistäminen MongoDB:een, modelien teko                  |
+|       | 2    | Käyttöliittymän päivitystä                                         |
+|  yht  | 22   |                                                                    |
