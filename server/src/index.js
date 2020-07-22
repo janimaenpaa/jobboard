@@ -1,5 +1,7 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { v4 } = require("uuid");
+require("dotenv").config()
+const { ApolloServer, UserInputError, gql } = require("apollo-server")
+const { v4 } = require("uuid")
+const mongoose = require("mongoose")
 
 let posts = [
   {
@@ -28,10 +30,28 @@ let posts = [
     link: "https://reactjs.org",
     state: "ACCEPTED",
   },
-];
+]
+
+const User = require("./models/User")
+const Post = require("./models/Post")
+
+mongoose.set("useFindAndModify", false)
+
+console.log(`connecting to ${process.env.MONGODB_URI}`)
+
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("connected to MongoDB")
+  })
+  .catch((error) => {
+    console.log("error connection to MongoDB:", error.message)
+  })
 
 const typeDefs = gql`
-
   enum allowedState {
     WAITING
     ACCEPTED
@@ -54,6 +74,7 @@ const typeDefs = gql`
 
   type Query {
     postCount: Int!
+    userCount: Int!
     allPosts: [Post!]!
   }
 
@@ -68,34 +89,54 @@ const typeDefs = gql`
       link: String!
     ): Post
   }
-`;
+`
 
 const resolvers = {
   Query: {
-    postCount: () => posts.length,
-    allPosts: () => posts,
+    postCount: () => Post.collection.countDocuments(),
+    userCount: () => User.collection.countDocuments(),
+    allPosts: () => Post.find({}),
   },
   Mutation: {
-    addPost: (root, args) => {
-      const post = {
+    addPost: async (root, args) => {
+      /* const post = {
         ...args,
         id: v4(),
         state: "WAITING",
-        published: String(new Date().getDate())
-      };
-      posts = posts.concat(post);
-      return post;
+        published: String(new Date().getDate()),
+      }
+      posts = posts.concat(post)
+      return post */
+      const date = {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        day: new Date().getDate(),
+      }
+
+      const post = new Post({
+        ...args,
+        state: "WAITING",
+        published: `${date.year}/${date.month}/${date.day}`,
+      })
+
+      try {
+        await post.save()
+      } catch (error) {
+        throw new UserInputError(error.message, { invalidArgs: args })
+      }
+
+      return post
     },
   },
-};
+}
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
   playground: true,
-});
+})
 
 server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`);
-});
+  console.log(`Server ready at ${url}`)
+})
