@@ -1,17 +1,32 @@
-import React, { FC } from "react"
-import { Card } from "antd"
+import React from "react"
+import styled from "styled-components"
 
 import { JobPost } from "../types"
+import Card from "./Card"
+import { device } from "../theme"
 
-const JobList: FC<{ jobs: JobPost[] }> = ({ jobs }) => (
-  <div style={{ maxWidth: "80%", marginTop: 60 }}>
+const Container = styled.div`
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  max-width: 60%;
+  margin: 1rem auto auto auto;
+
+  @media ${device.laptop} {
+    max-width: 80%;
+  }
+  @media ${device.tablet} {
+    max-width: 90%;
+    border-radius: 0;
+  }
+`
+
+const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => (
+  <Container>
     {jobs.map((job) => (
-      <Card key={job.id} style={{ margin: 20 }}>
-        <Card.Meta title={job.title} description={job.company} />
-        <p>{job.description}</p>
-      </Card>
+      <Card key={job.id} job={job} />
     ))}
-  </div>
+  </Container>
 )
 
 export default JobList

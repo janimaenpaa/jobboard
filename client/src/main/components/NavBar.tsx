@@ -8,8 +8,7 @@ interface Props {
 
 const Bar = styled.div`
   display: flex;
-  position: fixed;
-  top: 0;
+  position: sticky;
   background-color: black;
   width: 100%;
   z-index: 99;

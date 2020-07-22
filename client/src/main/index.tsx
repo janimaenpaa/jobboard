@@ -24,8 +24,8 @@ const Main: FC = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <>
-          <NavBar title="JobBoard" />
           <GlobalStyles />
+          <NavBar title="JobBoard" />
           <Switch>
             <Route path="/new" render={() => <NewPost />} />
             <Route path="/recruiter" render={() => <RecruiterPage />} />

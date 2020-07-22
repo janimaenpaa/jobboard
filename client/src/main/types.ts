@@ -18,7 +18,6 @@ export interface JobPost {
   location: string
   published: string
   deadline?: string
-  techs: Techs
   link: string
   state: State
 }
