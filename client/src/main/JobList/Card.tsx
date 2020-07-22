@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { JobPost } from "../types"
 import { device } from "../theme"
@@ -13,6 +14,10 @@ const Container = styled.div`
   padding: 20px;
   width: 100%;
 
+  &:hover {
+    background-color: #81d2ff;
+  }
+
   @media ${device.tablet} {
     flex-direction: column;
     align-items: flex-start;
@@ -24,6 +29,19 @@ const Title = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
   width: 100%;
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 `
 
 const Company = styled.div`
@@ -59,20 +77,29 @@ const TechButton = styled.button`
 `
 const Card: React.FC<{ job: JobPost }> = ({ job }) => {
   return (
-    <Container>
-      <Company>{job.company}</Company>
-      <Content>
-        <Title>{job.title}</Title>
-        <Location>{job.location}</Location>
-        <Published>Published: {job.published}</Published>
-        <Tech>
-          <TechButton>MongoDB</TechButton>
-          <TechButton>Express</TechButton>
-          <TechButton>React</TechButton>
-          <TechButton>Node.js</TechButton>
-        </Tech>
-      </Content>
-    </Container>
+    <StyledLink to={`/post/${job.id}`}>
+      <Container>
+        <Company>{job.company}</Company>
+        <Content>
+          <Title>
+            <StyledLink
+              to={`/post/${job.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              {job.title}
+            </StyledLink>
+          </Title>
+          <Location>{job.location}</Location>
+          <Published>Published: {job.published}</Published>
+          <Tech>
+            <TechButton>MongoDB</TechButton>
+            <TechButton>Express</TechButton>
+            <TechButton>React</TechButton>
+            <TechButton>Node.js</TechButton>
+          </Tech>
+        </Content>
+      </Container>
+    </StyledLink>
   )
 }
 
