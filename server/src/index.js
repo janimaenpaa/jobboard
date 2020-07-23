@@ -54,7 +54,7 @@ const typeDefs = gql`
   }
 
   type Token {
-    token: String!
+    value: String!
   }
 
   type Query {
@@ -64,7 +64,6 @@ const typeDefs = gql`
     allRecruiters: [Recruiter!]!
     findPost(id: String): Post!
     recruiter(id: ID!): Recruiter!
-    login(email: String!, password: String!): Token!
     me: Recruiter
   }
 
@@ -85,6 +84,7 @@ const typeDefs = gql`
       company: String!
       password: String!
     ): Recruiter!
+    login(email: String!, password: String!): Token
   }
 `
 
@@ -107,6 +107,9 @@ const resolvers = {
           invalidArgs: args,
         })
       }
+    },
+    me: (root, args, context) => {
+      return context.currentRecruiter
     },
   },
   Mutation: {
@@ -144,12 +147,41 @@ const resolvers = {
         throw new UserInputError(error.message, { invalidArgs: args })
       })
     },
+    login: async (root, args) => {
+      const recruiter = await Recruiter.findOne({ email: args.email })
+
+      const passwordMatches = await bcrypt.compare(
+        args.password,
+        recruiter.password
+      )
+
+      if (!recruiter || !passwordMatches) {
+        throw new UserInputError("Invalid email or password")
+      }
+
+      const recruiterForToken = {
+        email: recruiter.email,
+        id: recruiter._id,
+      }
+
+      return { value: jwt.sign(recruiterForToken, process.env.SECRET) }
+    },
   },
 }
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: async ({ req }) => {
+    const auth = req ? req.headers.authorization : null
+    if (auth && auth.toLowerCase().startsWith("bearer ")) {
+      const decodedToken = jwt.verify(auth.substring(7), process.env.SECRET)
+      const currentRecruiter = await Recruiter.findById(
+        decodedToken.id
+      ).populate("posts")
+      return { currentRecruiter }
+    }
+  },
   introspection: true,
   playground: true,
 })
