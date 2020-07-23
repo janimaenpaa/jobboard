@@ -15,14 +15,20 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
   company: {
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
+  ],
 })
 
-module.exports = mongoose.model("User", schema)
+module.exports = mongoose.model("Recruiter", schema)

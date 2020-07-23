@@ -1,38 +1,10 @@
 require("dotenv").config()
 const { ApolloServer, UserInputError, gql } = require("apollo-server")
-const { v4 } = require("uuid")
 const mongoose = require("mongoose")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
-let posts = [
-  {
-    id: "3d594650-3436-11e9-bc57-8b80ba54c431",
-    title: "Fullstack Developer",
-    company: "Turtle Solutions",
-    recruiter: "Matti Meikäläinen",
-    description:
-      "Etsimme nyt kokenutta Full Stack Node.js -kehittäjää asiakasprojekteihimme. Jos uskot että sinusta on on-site konsultiksi asiakkaidemme haastaviin projekteihin, sinulla on sujuva suomen kielen taito ja useamman vuoden koodauskokemus, haluamme kuulla sinusta nyt.",
-    location: "Helsinki",
-    published: "15-7-2020",
-    deadline: "30-7-2020",
-    link: "https://reactjs.org",
-    state: "WAITING",
-  },
-  {
-    id: "3d594650-3436-11e9-bc57-8b80ba54c432",
-    title: "Frontend Developer",
-    company: "Moose Solutions",
-    recruiter: "Mikko Meikäläinen",
-    description:
-      "Etsimme nyt kokenutta Frontend -kehittäjää asiakasprojekteihimme. Jos uskot että sinusta on on-site konsultiksi asiakkaidemme haastaviin projekteihin, sinulla on sujuva suomen kielen taito ja useamman vuoden koodauskokemus, haluamme kuulla sinusta nyt.",
-    location: "Helsinki",
-    published: "15-7-2020",
-    deadline: "30-7-2020",
-    link: "https://reactjs.org",
-    state: "ACCEPTED",
-  },
-]
-
-const User = require("./models/User")
+const Recruiter = require("./models/Recruiter")
 const Post = require("./models/Post")
 
 mongoose.set("useFindAndModify", false)
@@ -72,11 +44,28 @@ const typeDefs = gql`
     state: allowedState!
   }
 
+  type Recruiter {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    company: String!
+    posts: [Post!]!
+  }
+
+  type Token {
+    token: String!
+  }
+
   type Query {
     postCount: Int!
-    userCount: Int!
+    recruiterCount: Int!
     allPosts: [Post!]!
+    allRecruiters: [Recruiter!]!
     findPost(id: String): Post!
+    recruiter(id: ID!): Recruiter!
+    login(email: String!, password: String!): Token!
+    me: Recruiter
   }
 
   type Mutation {
@@ -88,15 +77,23 @@ const typeDefs = gql`
       location: String!
       deadline: String
       link: String!
-    ): Post
+    ): Post!
+    createRecruiter(
+      email: String!
+      firstName: String!
+      lastName: String!
+      company: String!
+      password: String!
+    ): Recruiter!
   }
 `
 
 const resolvers = {
   Query: {
     postCount: () => Post.collection.countDocuments(),
-    userCount: () => User.collection.countDocuments(),
+    recruiterCount: () => Recruiter.collection.countDocuments(),
     allPosts: () => Post.find({}),
+    allRecruiters: () => Recruiter.find({}),
     findPost: async (root, args) => {
       if (!args.id) {
         throw new UserInputError(error.message, { invalidArgs: args })
@@ -133,6 +130,19 @@ const resolvers = {
       }
 
       return post
+    },
+    createRecruiter: async (root, args) => {
+      const saltRounds = 10
+      const passwordHash = await bcrypt.hash(args.password, saltRounds)
+
+      const recruiter = new Recruiter({
+        ...args,
+        password: passwordHash,
+      })
+
+      return recruiter.save().catch((error) => {
+        throw new UserInputError(error.message, { invalidArgs: args })
+      })
     },
   },
 }
