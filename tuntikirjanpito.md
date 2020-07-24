@@ -14,4 +14,7 @@
 | 21.7. | 3    | Frontendin uusien näkymien tekoa, tyylien säätelyä                 |
 | 22.7. | 1    | Backendin yhdistäminen MongoDB:een, modelien teko                  |
 |       | 2    | Käyttöliittymän päivitystä                                         |
-|  yht  | 22   |                                                                    |
+|       | 3    | Backendin resolveri, frontendin uusi näkymä, tyylien hiomista      |
+| 23.7. | 1    | Käyttäjän luonti backendissa                                       |
+| 24.7. | 3    | Käyttäjän autentikointi backendissa, koodin refaktorointi          |
+|  yht  | 29   |                                                                    |
