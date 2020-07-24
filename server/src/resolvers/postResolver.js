@@ -1,10 +1,10 @@
-const { UserInputError } = require("apollo-server")
+const { AuthenticationError, UserInputError } = require("apollo-server")
 const Post = require("../models/Post")
 
 module.exports = {
   Query: {
     postCount: () => Post.collection.countDocuments(),
-    allPosts: () => Post.find({}),
+    allPosts: () => Post.find({}).populate("recruiter"),
     findPost: async (root, args) => {
       if (!args.id) {
         throw new UserInputError(error.message, { invalidArgs: args })
@@ -21,11 +21,19 @@ module.exports = {
     },
   },
   Mutation: {
-    addPost: async (root, args) => {
+    addPost: async (root, args, context) => {
+      const currentRecruiter = context.currentRecruiter
+
+      if (!currentRecruiter) {
+        throw new AuthenticationError("Not authenticated")
+      }
+
       const post = new Post({
         ...args,
-        state: "WAITING",
+        recruiter: currentRecruiter,
+        company: currentRecruiter.company,
         published: Date.now(),
+        state: "WAITING",
       })
 
       try {
@@ -33,6 +41,9 @@ module.exports = {
       } catch (error) {
         throw new UserInputError(error.message, { invalidArgs: args })
       }
+
+      currentRecruiter.posts = currentRecruiter.posts.concat(post)
+      await currentRecruiter.save()
 
       return post
     },

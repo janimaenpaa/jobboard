@@ -3,11 +3,12 @@ const jwt = require("jsonwebtoken")
 const { UserInputError } = require("apollo-server")
 
 const Recruiter = require("../models/Recruiter")
+const Post = require("../models/Post")
 
 module.exports = {
   Query: {
     recruiterCount: () => Recruiter.collection.countDocuments(),
-    allRecruiters: () => Recruiter.find({}),
+    allRecruiters: () => Recruiter.find({}).populate("posts"),
     me: (root, args, context) => {
       return context.currentRecruiter
     },

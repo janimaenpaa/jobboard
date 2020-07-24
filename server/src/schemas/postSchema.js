@@ -30,8 +30,6 @@ const postSchema = gql`
   extend type Mutation {
     addPost(
       title: String!
-      company: String!
-      recruiter: String!
       description: String!
       location: String!
       deadline: String
