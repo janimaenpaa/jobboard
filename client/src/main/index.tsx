@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useQuery } from "@apollo/client"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
@@ -13,6 +13,7 @@ import NewPost from "./NewPost"
 import NavBar from "./components/NavBar"
 
 const Main: React.FC = () => {
+  const [token, setToken] = useState(null)
   const { error, loading, data } = useQuery(ALL_POSTS)
   console.log(data)
 
@@ -29,7 +30,10 @@ const Main: React.FC = () => {
           <Switch>
             <Route path="/post/:id" render={() => <JobView />} />
             <Route path="/new" render={() => <NewPost />} />
-            <Route path="/recruiter" render={() => <RecruiterPage />} />
+            <Route
+              path="/recruiter"
+              render={() => <RecruiterPage setToken={setToken} />}
+            />
             <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
           </Switch>
         </>

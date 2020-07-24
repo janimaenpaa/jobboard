@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
+import { useMutation } from "@apollo/client"
+import { LOGIN } from "../../queries"
 
 const Form = styled.form`
   flex-direction: column;
@@ -47,13 +49,28 @@ type FormData = {
   password: string
 }
 
-interface Props {}
-
-const Login = (props: Props) => {
+const Login: React.FC<{ setToken: any }> = ({ setToken }) => {
   const { register, handleSubmit } = useForm<FormData>()
-  const onSubmit = (data: any) => console.log(data)
+
+  const [login, result] = useMutation(LOGIN, {
+    onError: (error) => {
+      console.log(error.graphQLErrors[0].message)
+    },
+  })
+
+  useEffect(() => {
+    if (result.data) {
+      const token = result.data.login.token
+      setToken(token)
+      localStorage.setItem("recruiter-token", token)
+    }
+  }, [result.data]) // eslint-disable-line
+
+  const onSubmit = handleSubmit(({ email, password }) => {
+    login({ variables: { email, password } })
+  })
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={onSubmit}>
       <h2>Login</h2>
       <Label>Email</Label>
       <Input name="email" ref={register} />

@@ -20,7 +20,7 @@ const Signup = styled.div`
   padding: 20px;
 `
 
-const View: React.FC = () => {
+const View: React.FC<{ setToken: any }> = ({ setToken }) => {
   return (
     <Card>
       <Signup>
@@ -38,7 +38,7 @@ const View: React.FC = () => {
           <Link to="/recruiter/signup">Signup here</Link>
         </p>
       </Signup>
-      <Login />
+      <Login setToken={setToken} />
     </Card>
   )
 }
