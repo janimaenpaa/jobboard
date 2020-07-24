@@ -11,7 +11,7 @@ module.exports = {
       }
 
       try {
-        const post = await Post.findById(args.id)
+        const post = await Post.findById(args.id).populate("recruiter")
         return post
       } catch (error) {
         throw new UserInputError(error.message, {
