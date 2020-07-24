@@ -12,9 +12,8 @@ const schema = new mongoose.Schema({
     minlength: 2,
   },
   recruiter: {
-    type: String,
-    required: true,
-    minlength: 3,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Recruiter",
   },
   description: {
     type: String,

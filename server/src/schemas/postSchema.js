@@ -1,6 +1,6 @@
-import { gql } from "apollo-server"
+const { gql } = require("apollo-server")
 
-export default gql`
+const postSchema = gql`
   enum allowedState {
     WAITING
     ACCEPTED
@@ -12,7 +12,7 @@ export default gql`
     id: ID!
     title: String!
     company: String!
-    recruiter: String!
+    recruiter: Recruiter!
     description: String!
     location: String!
     published: String!
@@ -39,3 +39,5 @@ export default gql`
     ): Post!
   }
 `
+
+module.exports = postSchema
