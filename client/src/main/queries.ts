@@ -6,7 +6,13 @@ export const ALL_POSTS = gql`
       id
       title
       company
-      recruiter
+      recruiter {
+        id
+        email
+        firstName
+        lastName
+        company
+      }
       description
       location
       published
@@ -23,7 +29,13 @@ export const FIND_POST = gql`
       id
       title
       company
-      recruiter
+      recruiter {
+        id
+        email
+        firstName
+        lastName
+        company
+      }
       description
       location
       published
@@ -37,8 +49,6 @@ export const FIND_POST = gql`
 export const ADD_POST = gql`
   mutation addPost(
     $title: String!
-    $company: String!
-    $recruiter: String!
     $description: String!
     $location: String!
     $deadline: String
@@ -46,8 +56,6 @@ export const ADD_POST = gql`
   ) {
     addPost(
       title: $title
-      company: $company
-      recruiter: $recruiter
       description: $description
       location: $location
       deadline: $deadline
@@ -56,7 +64,13 @@ export const ADD_POST = gql`
       id
       title
       company
-      recruiter
+      recruiter {
+        id
+        email
+        firstName
+        lastName
+        company
+      }
       description
       location
       deadline
