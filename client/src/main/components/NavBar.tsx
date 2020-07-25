@@ -41,7 +41,6 @@ const NavLink = styled.div`
 `
 
 const NavBar: React.FC<Props> = ({ title, token, logout }) => {
-  console.log(token)
   if (token) {
     return (
       <Bar>

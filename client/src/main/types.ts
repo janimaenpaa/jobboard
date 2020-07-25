@@ -5,7 +5,7 @@ export interface Techs {
 
 export enum State {
   WAITING = "WAITING",
-  ACCEPTED = "ACCEPTED",
+  ACCEPTED = "APPROVED",
   HIDDEN = "HIDDEN",
 }
 

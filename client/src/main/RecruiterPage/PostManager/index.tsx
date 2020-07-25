@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useQuery } from "@apollo/client"
 import { ME } from "../../queries"
 import { JobPost } from "../../types"
+import PostColumn from "./PostColumn"
 
 const Card = styled.div`
   display: flex;
@@ -23,13 +24,20 @@ const PostManager: React.FC = () => {
 
   const posts: [JobPost] = data.me.posts
 
+  const approvedPosts = posts
+    .filter((post) => post.state === "APPROVED")
+    .map((post) => <PostColumn key={post.id} {...post} />)
+
+  const waitingPosts = posts
+    .filter((post) => post.state === "WAITING")
+    .map((post) => <PostColumn key={post.id} {...post} />)
+
   return (
     <Card>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <h3>Posts waiting to be approved</h3>
+      {waitingPosts}
+      <h3>Approved posts</h3>
+      {approvedPosts}
     </Card>
   )
 }
