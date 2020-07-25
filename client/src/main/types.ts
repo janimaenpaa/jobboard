@@ -13,11 +13,20 @@ export interface JobPost {
   id: string
   title: string
   company: string
-  recruiter: string
+  recruiter: Recruiter
   description: string
   location: string
   published: string
   deadline?: string
   link: string
   state: State
+}
+
+export interface Recruiter {
+  id: string
+  email: string
+  firstName: string
+  lastName: string
+  company: string
+  posts: [JobPost]
 }

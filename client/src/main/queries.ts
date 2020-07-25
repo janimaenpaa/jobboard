@@ -86,3 +86,25 @@ export const LOGIN = gql`
     }
   }
 `
+
+export const ME = gql`
+  query {
+    me {
+      id
+      email
+      firstName
+      lastName
+      company
+      posts {
+        id
+        title
+        description
+        location
+        published
+        deadline
+        link
+        state
+      }
+    }
+  }
+`

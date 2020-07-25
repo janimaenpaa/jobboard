@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useQuery } from "@apollo/client"
+import { useApolloClient, useQuery } from "@apollo/client"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "./global"
@@ -13,12 +13,19 @@ import NewPost from "./NewPost"
 import NavBar from "./components/NavBar"
 
 const Main: React.FC = () => {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem("recruiter-token"))
   const { error, loading, data } = useQuery(ALL_POSTS)
+  const client = useApolloClient()
   console.log(data)
 
   if (loading) {
     return <div>Loading...</div>
+  }
+
+  const logout = () => {
+    setToken(null)
+    localStorage.clear()
+    client.resetStore()
   }
 
   return (
@@ -26,13 +33,13 @@ const Main: React.FC = () => {
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyles />
-          <NavBar title="JobBoard" />
+          <NavBar title="JobBoard" token={token} logout={logout} />
           <Switch>
             <Route path="/post/:id" render={() => <JobView />} />
             <Route path="/new" render={() => <NewPost />} />
             <Route
               path="/recruiter"
-              render={() => <RecruiterPage setToken={setToken} />}
+              render={() => <RecruiterPage setToken={setToken} token={token} />}
             />
             <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
           </Switch>

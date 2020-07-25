@@ -2,7 +2,9 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
+
 import Login from "../Login"
+import PostManager from "../PostManager"
 
 const Card = styled.div`
   display: flex;
@@ -20,7 +22,11 @@ const Signup = styled.div`
   padding: 20px;
 `
 
-const View: React.FC<{ setToken: any }> = ({ setToken }) => {
+const View: React.FC<{ setToken: any; token: any }> = ({ setToken, token }) => {
+  if (token) {
+    return <PostManager />
+  }
+
   return (
     <Card>
       <Signup>

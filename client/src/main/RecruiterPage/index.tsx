@@ -9,13 +9,19 @@ const Container = styled.div`
   justify-content: center;
 `
 
-const RecruiterPage: React.FC<{ setToken: any }> = ({ setToken }) => {
+const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
+  setToken,
+  token,
+}) => {
   return (
     <Router>
       <Container>
         <Switch>
           <Route path="/recruiter/signup" render={() => <Signup />} />
-          <Route path="/" render={() => <View setToken={setToken} />} />
+          <Route
+            path="/"
+            render={() => <View setToken={setToken} token={token} />}
+          />
         </Switch>
       </Container>
     </Router>
