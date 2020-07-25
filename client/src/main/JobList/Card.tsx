@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { JobPost } from "../types"
 import { device } from "../theme"
+import { toFormattedDate } from "../utils"
 
 const Container = styled.div`
   display: flex;
@@ -81,16 +82,9 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
       <Container>
         <Company>{job.company}</Company>
         <Content>
-          <Title>
-            <StyledLink
-              to={`/post/${job.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              {job.title}
-            </StyledLink>
-          </Title>
+          <Title>{job.title}</Title>
           <Location>{job.location}</Location>
-          <Published>Published: {job.published}</Published>
+          <Published>Published: {toFormattedDate(job.published)}</Published>
           <Tech>
             <TechButton>MongoDB</TechButton>
             <TechButton>Express</TechButton>
