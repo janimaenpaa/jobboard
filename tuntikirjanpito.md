@@ -17,4 +17,6 @@
 |       | 3    | Backendin resolveri, frontendin uusi näkymä, tyylien hiomista      |
 | 23.7. | 1    | Käyttäjän luonti backendissa                                       |
 | 24.7. | 3    | Käyttäjän autentikointi backendissa, koodin refaktorointi          |
-|  yht  | 29   |                                                                    |
+|       | 2    | Backendin bugien korjaamista                                       |
+| 25.7. | 2    | Autentikointi frontendissa, UI-muutoksia kirjautuessa              |
+|  yht  | 33   |                                                                    |
