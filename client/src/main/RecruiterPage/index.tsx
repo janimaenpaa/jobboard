@@ -1,8 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { Link, BrowserRouter as Router, Route, Switch, useRouteMatch } from "react-router-dom"
 import View from "./View"
 import Signup from "./Signup"
+import NewPost from "./NewPost"
 
 const Container = styled.div`
   display: flex;
@@ -13,18 +14,19 @@ const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
   setToken,
   token,
 }) => {
+  let { path, url } = useRouteMatch()
   return (
-    <Router>
       <Container>
         <Switch>
-          <Route path="/recruiter/signup" render={() => <Signup />} />
+          <Route path={`${path}/signup`} render={() => <Signup />} />
+          <Route path={`${path}/new`} render={() => <NewPost />} />
           <Route
-            path="/"
+            exact
+            path={path}
             render={() => <View setToken={setToken} token={token} />}
           />
         </Switch>
       </Container>
-    </Router>
   )
 }
 

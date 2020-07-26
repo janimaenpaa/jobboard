@@ -27,6 +27,7 @@ const Main: React.FC = () => {
     localStorage.clear()
     client.resetStore()
   }
+  
 
   return (
     <Router>
@@ -36,7 +37,6 @@ const Main: React.FC = () => {
           <NavBar title="JobBoard" token={token} logout={logout} />
           <Switch>
             <Route path="/post/:id" render={() => <JobView />} />
-            <Route path="/new" render={() => <NewPost />} />
             <Route
               path="/recruiter"
               render={() => <RecruiterPage setToken={setToken} token={token} />}

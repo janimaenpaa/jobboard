@@ -68,9 +68,6 @@ const NavBar: React.FC<Props> = ({ title, token, logout }) => {
         <Title>{title}</Title>
       </StyledLink>
       <Links>
-        <StyledLink to="/new">
-          <NavLink>New</NavLink>
-        </StyledLink>
         <StyledLink to="/recruiter">
           <NavLink>Recruiters</NavLink>
         </StyledLink>
