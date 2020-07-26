@@ -3,7 +3,7 @@ const { gql } = require("apollo-server")
 const postSchema = gql`
   enum allowedState {
     WAITING
-    ACCEPTED
+    APPROVED
     HIDDEN
     PINNED
   }
