@@ -7,6 +7,7 @@ export enum State {
   WAITING = "WAITING",
   ACCEPTED = "APPROVED",
   HIDDEN = "HIDDEN",
+  PINNED = "PINNED",
 }
 
 export interface JobPost {

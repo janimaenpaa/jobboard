@@ -11,8 +11,20 @@ const Card = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-top: 2rem;
-  width: 60%;
+  margin-top: 1rem;
+  width: 100%;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+`
+
+const Title = styled.h3`
+  margin-top: 0rem;
+  font-size: 1rem;
+  font-weight: 600;
 `
 
 const PostManager: React.FC = () => {
@@ -32,13 +44,27 @@ const PostManager: React.FC = () => {
     .filter((post) => post.state === "WAITING")
     .map((post) => <PostColumn key={post.id} {...post} />)
 
+  const pinnedPosts = posts
+    .filter((post) => post.state === "PINNED")
+    .map((post) => <PostColumn key={post.id} {...post} />)
+
   return (
-    <Card>
-      <h3>Posts waiting to be approved</h3>
-      {waitingPosts}
-      <h3>Approved posts</h3>
-      {approvedPosts}
-    </Card>
+    <Container>
+      <Card>
+        <Title>Posts waiting to be approved</Title>
+        {waitingPosts}
+      </Card>
+      {pinnedPosts.length > 0 && (
+        <Card>
+          <Title>Pinned posts</Title>
+          {pinnedPosts}
+        </Card>
+      )}
+      <Card>
+        <Title>Approved posts</Title>
+        {approvedPosts}
+      </Card>
+    </Container>
   )
 }
 
