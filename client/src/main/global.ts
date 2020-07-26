@@ -11,8 +11,11 @@ export const GlobalStyles = createGlobalStyle`
   body {
     background: #e8e8e8;
     color: black;
-    font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: Lato, Roboto-Slab;
     height: 100vh;
+    font-smooth: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
   `

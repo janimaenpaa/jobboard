@@ -3,18 +3,42 @@ import { useMutation } from "@apollo/client"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { ADD_POST, ALL_POSTS } from "../../queries"
+import { device } from "../../theme"
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+  
 `
 const Form = styled.form`
   flex-direction: column;
-  width: 400px;
+  margin-top: 2rem;
+  min-width: 50%;
+
+  @media ${device.laptopL} {
+    min-width: 75%;
+  }
+
+  @media ${device.tablet} {
+    min-width: 100%;
+  }
+`
+
+const FormCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-top: 5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  @media ${device.tablet} {
+    border-radius: 0px;
+  }
 `
 
 const Label = styled.label`
@@ -23,8 +47,8 @@ const Label = styled.label`
   display: block;
   margin-top: 10px;
   color: black;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 500;
 `
 
 const Input = styled.input`
@@ -33,7 +57,7 @@ const Input = styled.input`
   width: 100%;
   border-radius: 4px;
   border: 1px solid black;
-  padding: 6px 15px;
+  padding: 12px 15px;
   font-size: 14px;
   color: black;
 `
@@ -48,14 +72,23 @@ const Button = styled.button`
   border: 1px solid white;
   padding: 10px 15px;
   margin-bottom: 10px;
-  margin-top: 6px;
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+`
+const Header = styled.h2`
+  margin: 0 8px;
+  font-weight: 900;
+  font-size: 2rem;
+`
+const CardHeader = styled.h3`
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.5rem;
 `
 
 type FormData = {
   title: string
-  company: string
-  recruiter: string
   description: string
   location: string
   deadline: String
@@ -70,11 +103,9 @@ const NewPost: React.FC = () => {
   })
 
   const onSubmit = handleSubmit(
-    ({ title, company, recruiter, description, location, deadline, link }) => {
+    ({ title, description, location, deadline, link }) => {
       console.log({
         title,
-        company,
-        recruiter,
         description,
         location,
         deadline,
@@ -83,8 +114,6 @@ const NewPost: React.FC = () => {
       createPost({
         variables: {
           title,
-          company,
-          recruiter,
           description,
           location,
           deadline,
@@ -97,36 +126,29 @@ const NewPost: React.FC = () => {
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <h2>New</h2>
-        <div>
+        <Header>Post a Job</Header>
+        <FormCard>
+          <CardHeader>Basic information</CardHeader>
           <Label>Job Title</Label>
           <Input name="title" ref={register} />
-        </div>
-        <div>
-          <Label>Company</Label>
-          <Input name="company" ref={register} />
-        </div>
-        <div>
-          <Label>Recruiter</Label>
-          <Input name="recruiter" ref={register} />
-        </div>
-        <div>
-          <Label>Description</Label>
+          <Label>Job Description</Label>
           <Input name="description" ref={register} />
-        </div>
-        <div>
+        </FormCard>
+        <FormCard>
+          <CardHeader>Skills</CardHeader>
+          <Label>Add required or recommended skills for applicants</Label>
+          <Input name="skills" />
+        </FormCard>
+        <FormCard>
+          <CardHeader>Additional information</CardHeader>
           <Label>Location</Label>
           <Input name="location" ref={register} />
-        </div>
-        <div>
           <Label>Deadline</Label>
           <Input name="deadline" ref={register} />
-        </div>
-        <div>
           <Label>Link for applying</Label>
           <Input name="link" ref={register} />
-        </div>
-        <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
+        </FormCard>
       </Form>
     </Container>
   )

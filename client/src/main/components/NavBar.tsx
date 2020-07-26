@@ -15,12 +15,14 @@ const Bar = styled.div`
   background-color: black;
   width: 100%;
   z-index: 99;
-  align-items: center;
+  top: 0;
 `
 
 const Links = styled.div`
   display: flex;
   flex-direction: row;
+  align-content: center;
+  align-items: center;
 `
 
 const Title = styled.div`
@@ -30,14 +32,15 @@ const Title = styled.div`
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
 `
 
 const NavLink = styled.div`
   color: #f2f2f2;
-  text-align: right;
   padding: 14px 16px;
   text-decoration: none;
+  font-weight: 600;
 `
 
 const NavBar: React.FC<Props> = ({ title, token, logout }) => {

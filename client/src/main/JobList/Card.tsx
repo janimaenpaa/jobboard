@@ -75,6 +75,10 @@ const TechButton = styled.button`
   outline: none;
   font-weight: 500;
   color: white;
+
+  @media ${device.tablet} {
+    border-radius: 0;
+  }
 `
 const Card: React.FC<{ job: JobPost }> = ({ job }) => {
   return (

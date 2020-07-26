@@ -9,7 +9,6 @@ import { ALL_POSTS } from "./queries"
 import JobList from "./JobList"
 import JobView from "./JobView"
 import RecruiterPage from "./RecruiterPage"
-import NewPost from "./NewPost"
 import NavBar from "./components/NavBar"
 
 const Main: React.FC = () => {

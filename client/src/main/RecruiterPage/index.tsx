@@ -14,14 +14,13 @@ const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
   setToken,
   token,
 }) => {
-  let { path, url } = useRouteMatch()
+  let { path } = useRouteMatch()
   return (
       <Container>
         <Switch>
           <Route path={`${path}/signup`} render={() => <Signup />} />
           <Route path={`${path}/new`} render={() => <NewPost />} />
           <Route
-            exact
             path={path}
             render={() => <View setToken={setToken} token={token} />}
           />
