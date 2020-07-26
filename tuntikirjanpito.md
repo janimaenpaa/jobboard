@@ -18,5 +18,6 @@
 | 23.7. | 1    | Käyttäjän luonti backendissa                                       |
 | 24.7. | 3    | Käyttäjän autentikointi backendissa, koodin refaktorointi          |
 |       | 2    | Backendin bugien korjaamista                                       |
-| 25.7. | 2    | Autentikointi frontendissa, UI-muutoksia kirjautuessa              |
-|  yht  | 33   |                                                                    |
+| 25.7. | 4    | Autentikointi frontendissa, UI-näkymä kirjautuessa                 |
+| 26.7. | 2    | Kirjautumisen jälkeisen näkymän muokkaamista                       |
+|  yht  | 37   |                                                                    |
