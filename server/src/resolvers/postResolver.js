@@ -28,10 +28,16 @@ module.exports = {
         throw new AuthenticationError("Not authenticated")
       }
 
+      const parsedDescription = args.description
+        .replace("<br>", "")
+        .replace("<script>", "")
+        .replace("</script>", "")
+
       const post = new Post({
         ...args,
         recruiter: currentRecruiter,
         company: currentRecruiter.company,
+        description: parsedDescription,
         published: Date.now(),
         state: "WAITING",
       })
