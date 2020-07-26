@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { JobPost } from "../../types"
 import { toFormattedDate } from "../../utils"
+import { truncateSync } from "fs"
 
 interface Props {}
 
@@ -10,6 +11,9 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `
+const Row = styled.tr`
+  width: 100%;
+`
 
 const Title = styled.div``
 
@@ -17,17 +21,18 @@ const Buttons = styled.div``
 
 const PostColumn: React.FC<JobPost> = ({ title, published, deadline }) => {
   return (
-    <div>
-      <Container>
+    <Row>
+      <td>
         <Title>{title}</Title>
-        <div>{toFormattedDate(published)}</div>
-        {deadline ? <div>{deadline}</div> : <div>No deadline</div>}
+      </td>
+      <td>{toFormattedDate(published)}</td>
+      {deadline ? <td>{deadline}</td> : <td>No deadline</td>}
+      <td>
         <Buttons>
           <button>Edit</button> <button>Remove</button>
         </Buttons>
-      </Container>
-      <hr style={{ marginTop: 3 }} />
-    </div>
+      </td>
+    </Row>
   )
 }
 

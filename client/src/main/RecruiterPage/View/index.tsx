@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
-
 import Login from "../Login"
 import PostManager from "../PostManager"
 
@@ -16,6 +15,10 @@ const Card = styled.div`
   margin-top: 5rem;
   width: 60%;
 `
+const Container = styled.div`
+  min-width: 60%;
+  max-width: 100%;
+`
 
 const Signup = styled.div`
   width: 70%;
@@ -24,7 +27,11 @@ const Signup = styled.div`
 
 const View: React.FC<{ setToken: any; token: any }> = ({ setToken, token }) => {
   if (token) {
-    return <PostManager />
+    return (
+      <Container>
+        <PostManager />
+      </Container>
+    )
   }
 
   return (

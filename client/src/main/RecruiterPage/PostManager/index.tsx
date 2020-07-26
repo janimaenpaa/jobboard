@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useQuery } from "@apollo/client"
 import { ME } from "../../queries"
 import { JobPost } from "../../types"
-import PostColumn from "./PostColumn"
+import PostTable from "./PostTable"
 
 const Card = styled.div`
   display: flex;
@@ -34,35 +34,35 @@ const PostManager: React.FC = () => {
     return <Card>Loading...</Card>
   }
 
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
+
   const posts: [JobPost] = data.me.posts
 
-  const approvedPosts = posts
-    .filter((post) => post.state === "APPROVED")
-    .map((post) => <PostColumn key={post.id} {...post} />)
+  const approvedPosts = posts.filter((post) => post.state === "APPROVED")
 
-  const waitingPosts = posts
-    .filter((post) => post.state === "WAITING")
-    .map((post) => <PostColumn key={post.id} {...post} />)
+  const waitingPosts: JobPost[] | [] = posts.filter(
+    (post) => post.state === "WAITING"
+  )
 
-  const pinnedPosts = posts
-    .filter((post) => post.state === "PINNED")
-    .map((post) => <PostColumn key={post.id} {...post} />)
+  const pinnedPosts = posts.filter((post) => post.state === "PINNED")
 
   return (
     <Container>
       <Card>
         <Title>Posts waiting to be approved</Title>
-        {waitingPosts}
+        <PostTable {...waitingPosts} />
       </Card>
       {pinnedPosts.length > 0 && (
         <Card>
           <Title>Pinned posts</Title>
-          {pinnedPosts}
+          <PostTable {...pinnedPosts} />
         </Card>
       )}
       <Card>
         <Title>Approved posts</Title>
-        {approvedPosts}
+        <PostTable {...approvedPosts} />
       </Card>
     </Container>
   )
