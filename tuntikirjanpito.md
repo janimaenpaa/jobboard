@@ -24,4 +24,5 @@
 |       | 1    | Formin ja ulkoasun muokkausta                                                        |
 | 27.7. | 1    | React-Quill ja Quill -editoreihin tutustumista                                       |
 |       | 3    | React-Quillin lisääminen formiin, config, outputin säätö backendissa ja frontendissa |
-|  yht  | 44   |                                                                                      |
+|       | 3    | Backendin uusien mutaatioiden lisääminen                                             |
+|  yht  | 47   |                                                                                      |
