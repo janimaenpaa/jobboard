@@ -35,6 +35,7 @@ const postSchema = gql`
       deadline: String
       link: String!
     ): Post!
+    deletePost(id: ID!): Post!
   }
 `
 

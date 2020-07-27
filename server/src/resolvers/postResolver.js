@@ -53,5 +53,26 @@ module.exports = {
 
       return post
     },
+    deletePost: async (root, args, context) => {
+      const currentRecruiter = context.currentRecruiter
+
+      if (!currentRecruiter) {
+        throw new AuthenticationError("Not authenticated")
+      }
+
+      const postToBeDeleted = await Post.findById(args.id).populate("recruiter")
+
+      if (postToBeDeleted.recruiter.id !== currentRecruiter.id) {
+        throw new AuthenticationError("Not authorized to delete this post")
+      }
+
+      try {
+        await postToBeDeleted.remove()
+      } catch (error) {
+        throw new UserInputError(error.message, { invalidArgs: args })
+      }
+
+      return postToBeDeleted
+    },
   },
 }
