@@ -62,6 +62,10 @@ module.exports = {
 
       const postToBeDeleted = await Post.findById(args.id).populate("recruiter")
 
+      if (!postToBeDeleted) {
+        throw new UserInputError("No post found")
+      }
+
       if (postToBeDeleted.recruiter.id !== currentRecruiter.id) {
         throw new AuthenticationError("Not authorized to delete this post")
       }
@@ -73,6 +77,33 @@ module.exports = {
       }
 
       return postToBeDeleted
+    },
+    editPost: async (root, args, context) => {
+      const currentRecruiter = context.currentRecruiter
+
+      if (!currentRecruiter) {
+        throw new AuthenticationError("Not authenticated")
+      }
+
+      const postToBeEdited = await Post.findById(args.id).populate("recruiter")
+
+      if (!postToBeEdited) {
+        throw new UserInputError("No post found")
+      }
+
+      if (postToBeEdited.recruiter.id !== currentRecruiter.id) {
+        throw new AuthenticationError("Not authorized to edit this post")
+      }
+
+      const updatedPost = await Post.findByIdAndUpdate(
+        args.id,
+        { ...args },
+        {
+          new: true,
+        }
+      )
+
+      return updatedPost
     },
   },
 }

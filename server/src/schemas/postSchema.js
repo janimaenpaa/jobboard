@@ -36,6 +36,14 @@ const postSchema = gql`
       link: String!
     ): Post!
     deletePost(id: ID!): Post!
+    editPost(
+      id: ID!
+      title: String
+      description: String
+      location: String
+      deadline: String
+      link: String
+    ): Post!
   }
 `
 
