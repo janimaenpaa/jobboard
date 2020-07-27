@@ -1,10 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import { Link, useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
+import { Link, useParams } from "react-router-dom"
 import { JobPost } from "../types"
 import { FIND_POST } from "../queries"
 import { StyledLink } from "../styles"
+import { toFormattedDate } from "../utils"
 
 const Container = styled.div`
   display: flex;
@@ -15,6 +16,10 @@ const Container = styled.div`
   margin: 2rem;
   color: black;
   padding: 20px;
+
+  p {
+    margin-top: 0;
+  }
 `
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -32,7 +37,7 @@ const Header = styled.h3`
   font-size: 1.2rem;
 `
 
-const Description = styled.p`
+const Description = styled.div`
   margin: 0 0 0 0;
 `
 
@@ -66,10 +71,11 @@ const JobView: React.FC = () => {
       </StyledLink>
       <Company>{job.company}</Company>
       <Title>{job.title}</Title>
-      {job.location} | Published: {job.published}{" "}
+      {job.location} | Published: {toFormattedDate(job.published)}{" "}
       {job.deadline ? `| Deadline: ${job.deadline}` : ""}
       <Header>Description</Header>
-      <Description>{job.description}</Description>
+      <div dangerouslySetInnerHTML={{ __html: job.description }} />
+
       <Button>Apply</Button>
     </Container>
   )

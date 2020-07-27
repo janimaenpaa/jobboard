@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { ADD_POST, ALL_POSTS } from "../../queries"
 import { device } from "../../theme"
+import ReactQuill from "react-quill"
+import "react-quill/dist/quill.snow.css"
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 1rem;
-  
 `
 const Form = styled.form`
   flex-direction: column;
@@ -97,31 +97,60 @@ type FormData = {
 
 const NewPost: React.FC = () => {
   const { register, setValue, handleSubmit, errors } = useForm<FormData>()
+  const [editorValue, setEditorValue] = useState("")
 
   const [createPost] = useMutation(ADD_POST, {
     refetchQueries: [{ query: ALL_POSTS }],
   })
 
-  const onSubmit = handleSubmit(
-    ({ title, description, location, deadline, link }) => {
-      console.log({
+  const onSubmit = handleSubmit(({ title, location, deadline, link }) => {
+    console.log({
+      title,
+      location,
+      deadline,
+      link,
+    })
+    createPost({
+      variables: {
         title,
-        description,
+        description: editorValue,
         location,
         deadline,
         link,
-      })
-      createPost({
-        variables: {
-          title,
-          description,
-          location,
-          deadline,
-          link,
-        },
-      })
-    }
-  )
+      },
+    })
+  })
+
+  const modules = {
+    clipboard: {
+      matchVisual: false,
+    },
+    toolbar: [
+      [{ header: [2, 3, false] }],
+      ["bold", "italic", "underline", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link"],
+      ["clean"],
+    ],
+  }
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+  ]
 
   return (
     <Container>
@@ -132,7 +161,17 @@ const NewPost: React.FC = () => {
           <Label>Job Title</Label>
           <Input name="title" ref={register} />
           <Label>Job Description</Label>
-          <Input name="description" ref={register} />
+          {/* <Input name="description" ref={register} /> */}
+          <div style={{ height: 190 }}>
+            <ReactQuill
+              theme="snow"
+              value={editorValue}
+              onChange={setEditorValue}
+              modules={modules}
+              formats={formats}
+              style={{ height: 140 }}
+            />
+          </div>
         </FormCard>
         <FormCard>
           <CardHeader>Skills</CardHeader>
