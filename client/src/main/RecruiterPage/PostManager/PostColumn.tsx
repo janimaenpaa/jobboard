@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { useMutation } from "@apollo/client"
 import { JobPost } from "../../types"
-import { ALL_POSTS, DELETE_POST } from "../../queries"
+import { ALL_POSTS, DELETE_POST, ME } from "../../queries"
 import { toFormattedDate } from "../../utils"
 import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
@@ -60,7 +60,7 @@ const DeleteButton = styled.button`
 const PostColumn: React.FC<JobPost> = ({ id, title, published, deadline }) => {
   const [open, setOpen] = useState(false)
   const [deletePost] = useMutation(DELETE_POST, {
-    refetchQueries: [{ query: ALL_POSTS }],
+    refetchQueries: [{ query: ALL_POSTS }, { query: ME }],
   })
 
   const handleClickOpen = () => {
