@@ -4,12 +4,15 @@ import { useMutation } from "@apollo/client"
 import { JobPost } from "../../types"
 import { ALL_POSTS, DELETE_POST, ME } from "../../queries"
 import { toFormattedDate } from "../../utils"
+
 import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
+import Slide from "@material-ui/core/Slide"
+import { TransitionProps } from "@material-ui/core/transitions"
 
 const Container = styled.div`
   display: flex;
@@ -57,10 +60,24 @@ const DeleteButton = styled.button`
   }
 `
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>
+) {
+  return <Slide ref={ref} {...props} />
+})
+
 const PostColumn: React.FC<JobPost> = ({ id, title, published, deadline }) => {
   const [open, setOpen] = useState(false)
   const [deletePost] = useMutation(DELETE_POST, {
-    refetchQueries: [{ query: ALL_POSTS }, { query: ME }],
+    refetchQueries: [
+      {
+        query: ALL_POSTS,
+      },
+      {
+        query: ME,
+      },
+    ],
   })
 
   const handleClickOpen = () => {
@@ -72,36 +89,13 @@ const PostColumn: React.FC<JobPost> = ({ id, title, published, deadline }) => {
   }
 
   const handleDelete = () => {
-    deletePost({ variables: { id } })
+    deletePost({
+      variables: {
+        id,
+      },
+    })
     setOpen(false)
   }
-
-  const ReffedDialog = React.forwardRef((props, ref) => (
-    <Dialog
-      open={open}
-      ref={ref}
-      onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
-      <DialogTitle id="alert-dialog-title">
-        {`Are you sure you want to delete job "${title}"?`}
-      </DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          This action will delete the post permanently.
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          CANCEL
-        </Button>
-        <Button onClick={handleDelete} color="secondary" autoFocus>
-          DELETE
-        </Button>
-      </DialogActions>
-    </Dialog>
-  ))
 
   return (
     <Row>
@@ -114,7 +108,31 @@ const PostColumn: React.FC<JobPost> = ({ id, title, published, deadline }) => {
         <Buttons>
           <EditButton>EDIT</EditButton>
           <DeleteButton onClick={handleClickOpen}>DELETE</DeleteButton>
-          <ReffedDialog />
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {`Are you sure you want to delete job "${title}"?`}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                This action will delete the post permanently.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                CANCEL
+              </Button>
+              <Button onClick={handleDelete} color="secondary" autoFocus>
+                DELETE
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Buttons>
       </td>
     </Row>
