@@ -25,4 +25,7 @@
 | 27.7. | 1    | React-Quill ja Quill -editoreihin tutustumista                                       |
 |       | 3    | React-Quillin lisääminen formiin, config, outputin säätö backendissa ja frontendissa |
 |       | 3    | Backendin uusien mutaatioiden lisääminen                                             |
-|  yht  | 47   |                                                                                      |
+| 29.7. | 1    | MaterialUI:en tutustuminen                                                           |
+|       | 2    | Poistotoiminnallisuus frontendiin, ulkoasun tyylittelyä                              |
+| 30.7. | 2    | Alustavan muokkaustoiminnallisuuden lisääminen frontendiin                           |
+|  yht  | 52   |                                                                                      |
