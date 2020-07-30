@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { JobPost } from "../../types"
 import { ALL_POSTS, DELETE_POST, ME } from "../../queries"
@@ -106,7 +107,9 @@ const PostColumn: React.FC<JobPost> = ({ id, title, published, deadline }) => {
       {deadline ? <td>{deadline}</td> : <td>No deadline</td>}
       <td>
         <Buttons>
-          <EditButton>EDIT</EditButton>
+          <Link to={`/recruiter/post/${id}`}>
+            <EditButton>EDIT</EditButton>
+          </Link>
           <DeleteButton onClick={handleClickOpen}>DELETE</DeleteButton>
           <Dialog
             open={open}
