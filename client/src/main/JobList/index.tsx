@@ -33,6 +33,10 @@ const SearchBar = styled.input`
   margin-top: 1rem;
   outline: none;
 
+  &:focus {
+    background-color: #c7c7c7;
+  }
+
   @media ${device.tablet} {
     border-radius: 0px;
 `
@@ -44,8 +48,15 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
     return <Container>No jobs found...</Container>
   }
 
-  const nonFilteredJobs = jobs.map((job) => <Card key={job.id} job={job} />)
-  const filteredJobs = jobs.filter(
+  const sortedJobs = () =>
+    jobs.slice().sort((a, b) => {
+      if (a.state < b.state) return -1
+      if (a.state > b.state) return 1
+      return 0
+    })
+
+  const nonFilteredJobs = sortedJobs().map((job) => <Card key={job.id} job={job} />)
+  const filteredJobs = sortedJobs().filter(
     (job) =>
       String(job.title).toLowerCase().includes(filter) ||
       String(job.company).toLowerCase().includes(filter) ||

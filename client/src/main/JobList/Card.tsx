@@ -26,6 +26,27 @@ const Container = styled.div`
   }
 `
 
+const PinnedContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff455;
+  border-radius: 10px;
+  margin-top: 0.7rem;
+  padding: 20px;
+  width: 100%;
+
+  &:hover {
+    background-color: #ffd302;
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 0px;
+  }
+`
+
 const Title = styled.div`
   color: black;
   font-size: 1.2rem;
@@ -82,6 +103,27 @@ const TechButton = styled.button`
   }
 `
 const Card: React.FC<{ job: JobPost }> = ({ job }) => {
+  if (job.state === "PINNED") {
+    return (
+      <StyledLink to={`/post/${job.id}`}>
+        <PinnedContainer>
+          <Company>{job.company}</Company>
+          <Content>
+            <Title>{job.title}</Title>
+            <Location>{job.location}</Location>
+            <Published>Published: {toFormattedDate(job.published)}</Published>
+            <Tech>
+              <TechButton>MongoDB</TechButton>
+              <TechButton>Express</TechButton>
+              <TechButton>React</TechButton>
+              <TechButton>Node.js</TechButton>
+            </Tech>
+          </Content>
+        </PinnedContainer>
+      </StyledLink>
+    )
+  }
+
   return (
     <StyledLink to={`/post/${job.id}`}>
       <Container>
