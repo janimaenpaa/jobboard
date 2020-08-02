@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 
 import { JobPost } from "../types"
@@ -25,13 +25,50 @@ const Header = styled.h2`
   font-size: 2rem;
 `
 
-const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => (
-  <Container>
-    <Header>Listed jobs</Header>
-    {jobs.map((job) => (
-      <Card key={job.id} job={job} />
-    ))}
-  </Container>
-)
+const SearchBar = styled.input`
+  border: none;
+  border-radius: 10px;
+  background-color: #dedede;
+  padding: 10px;
+  margin-top: 1rem;
+  outline: none;
+
+  @media ${device.tablet} {
+    border-radius: 0px;
+`
+
+const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
+  const [filter, setFilter] = useState<string>("")
+
+  if (jobs.length === 0) {
+    return <Container>No jobs found...</Container>
+  }
+
+  const nonFilteredJobs = jobs.map((job) => <Card key={job.id} job={job} />)
+  const filteredJobs = jobs.filter(
+    (job) =>
+      String(job.title).toLowerCase().includes(filter) ||
+      String(job.company).toLowerCase().includes(filter) ||
+      String(job.location).toLowerCase().includes(filter)
+  )
+
+  const displayFilteredJobs = () => {
+    if (filteredJobs.length === 0) {
+      return <div style={{ margin: "1rem auto" }}>No jobs found...</div>
+    }
+    return filteredJobs.map((job) => <Card key={job.id} job={job} />)
+  }
+
+  return (
+    <Container>
+      <Header>Listed jobs</Header>
+      <SearchBar
+        placeholder="Search for a position, company or city..."
+        onChange={(event) => setFilter(event.target.value.toLowerCase())}
+      />
+      {filter.length === 0 ? nonFilteredJobs : displayFilteredJobs()}
+    </Container>
+  )
+}
 
 export default JobList

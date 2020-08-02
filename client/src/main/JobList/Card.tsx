@@ -22,6 +22,7 @@ const Container = styled.div`
   @media ${device.tablet} {
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 0px;
   }
 `
 
