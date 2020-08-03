@@ -4,6 +4,7 @@ const postSchema = gql`
   enum allowedState {
     WAITING
     APPROVED
+    EXPIRED
     HIDDEN
     PINNED
   }
@@ -17,6 +18,8 @@ const postSchema = gql`
     location: String!
     published: String!
     deadline: String
+    requiredSkills: [String]
+    recommendedSkills: [String]
     link: String!
     state: allowedState!
   }
@@ -33,6 +36,8 @@ const postSchema = gql`
       description: String!
       location: String!
       deadline: String
+      requiredSkills: [String]
+      recommendedSkills: [String]
       link: String!
     ): Post!
     deletePost(id: ID!): Post!
@@ -42,6 +47,8 @@ const postSchema = gql`
       description: String
       location: String
       deadline: String
+      requiredSkills: [String]
+      recommendedSkills: [String]
       link: String
     ): Post!
   }

@@ -31,6 +31,12 @@ const schema = new mongoose.Schema({
   deadline: {
     type: String,
   },
+  requiredSkills: {
+    type: [String],
+  },
+  recommendedSkills: {
+    type: [String],
+  },
   link: {
     type: String,
     required: true,
