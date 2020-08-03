@@ -7,6 +7,13 @@ import { FIND_POST } from "../queries"
 import { StyledLink } from "../styles"
 import { toFormattedDate } from "../utils"
 
+import ArrowBackIcon from "@material-ui/icons/ArrowBack"
+import AssignmentIcon from "@material-ui/icons/Assignment"
+import EventIcon from "@material-ui/icons/Event"
+import EventBusyIcon from "@material-ui/icons/EventBusy"
+import LocationCityIcon from "@material-ui/icons/LocationCity"
+import ScheduleIcon from "@material-ui/icons/Schedule"
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,7 +34,7 @@ const Title = styled.h2`
 `
 
 const Company = styled.h3`
-  margin: 1rem 0 0 0;
+  margin: 1.5rem 0 0 0;
   font-size: 1.1rem;
   color: gray;
 `
@@ -50,10 +57,18 @@ const Button = styled.button`
   border-radius: 4px;
   border: 1px solid white;
   padding: 10px 15px;
-  margin-bottom: 10px;
-  margin-top: 6px;
+  margin-bottom: 0.6rem;
+  margin-top: 1rem;
   font-size: 14px;
 `
+
+const Info = styled.div`
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+`
+
+const Skills = styled.div``
 
 const JobView: React.FC = () => {
   const { id } = useParams()
@@ -72,17 +87,32 @@ const JobView: React.FC = () => {
   return (
     <Container>
       <Card>
-        <StyledLink style={{ fontSize: "1rem" }} to="/">
-          {"<= Go back"}
+        <StyledLink
+          style={{ fontSize: "1.2rem", display: "flex", alignItems: "center" }}
+          to="/"
+        >
+          {<ArrowBackIcon />}
+          {"Back"}
         </StyledLink>
         <Company>{job.company}</Company>
         <Title>{job.title}</Title>
-        {job.location} | Published: {toFormattedDate(job.published)}{" "}
-        {job.deadline ? `| Deadline: ${job.deadline}` : ""}
+        <Info>
+          <LocationCityIcon style={{ margin: 0 }} />
+          {job.location} |
+          <EventIcon />
+          Published: {toFormattedDate(job.published)} {"| "}
+          <ScheduleIcon />
+          {job.deadline ? `${job.deadline}` : "No deadline assigned"}
+        </Info>
         <Header>Description</Header>
         <Description>
           <div dangerouslySetInnerHTML={{ __html: job.description }} />
         </Description>
+        <Skills>
+          <Header>Skills</Header>
+          <button>React</button> <button>Node</button> <button>Express</button>{" "}
+          <button>MongoDB</button>
+        </Skills>
         <Button>Apply</Button>
       </Card>
     </Container>
