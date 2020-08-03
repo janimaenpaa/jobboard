@@ -17,6 +17,8 @@ export const ALL_POSTS = gql`
       location
       published
       deadline
+      requiredSkills
+      recommendedSkills
       link
       state
     }
@@ -40,6 +42,8 @@ export const FIND_POST = gql`
       location
       published
       deadline
+      requiredSkills
+      recommendedSkills
       link
       state
     }
@@ -59,6 +63,8 @@ export const ADD_POST = gql`
       description: $description
       location: $location
       deadline: $deadline
+      requiredSkills: $requiredSkills
+      recommendedSkills: $recommendedSkills
       link: $link
     ) {
       id

@@ -8,11 +8,11 @@ import { StyledLink } from "../styles"
 import { toFormattedDate } from "../utils"
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
-import AssignmentIcon from "@material-ui/icons/Assignment"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import EventIcon from "@material-ui/icons/Event"
-import EventBusyIcon from "@material-ui/icons/EventBusy"
 import LocationCityIcon from "@material-ui/icons/LocationCity"
 import ScheduleIcon from "@material-ui/icons/Schedule"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +40,7 @@ const Company = styled.h3`
 `
 
 const Header = styled.h3`
-  margin: 1rem 0 0 0;
+  margin: 1rem 0 0.4rem 0;
   font-size: 1.2rem;
 `
 
@@ -68,7 +68,32 @@ const Info = styled.div`
   align-items: center;
 `
 
-const Skills = styled.div``
+const Skills = styled.div`
+  display: flex;
+`
+
+const GreenSkillButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-right: 0.4rem;
+`
+const BlueSkillButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: lightblue;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-right: 0.4rem;
+`
 
 const JobView: React.FC = () => {
   const { id } = useParams()
@@ -88,10 +113,15 @@ const JobView: React.FC = () => {
     <Container>
       <Card>
         <StyledLink
-          style={{ fontSize: "1.2rem", display: "flex", alignItems: "center" }}
+          style={{
+            fontSize: "1.2rem",
+            fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+          }}
           to="/"
         >
-          {<ArrowBackIcon />}
+          {<ArrowBackIcon style={{ fontSize: "1.8rem" }} />}
           {"Back"}
         </StyledLink>
         <Company>{job.company}</Company>
@@ -108,10 +138,32 @@ const JobView: React.FC = () => {
         <Description>
           <div dangerouslySetInnerHTML={{ __html: job.description }} />
         </Description>
+        <Header>Skills</Header>
         <Skills>
-          <Header>Skills</Header>
-          <button>React</button> <button>Node</button> <button>Express</button>{" "}
-          <button>MongoDB</button>
+          {job.requiredSkills.map((skill) => (
+            <BlueSkillButton key={skill}>
+              <CheckCircleIcon
+                style={{
+                  fontSize: "1rem",
+                  color: "darkblue",
+                  marginRight: 2,
+                }}
+              />
+              {skill}
+            </BlueSkillButton>
+          ))}
+          {job.recommendedSkills.map((skill) => (
+            <GreenSkillButton key={skill}>
+              <ThumbUpIcon
+                style={{
+                  fontSize: "1rem",
+                  color: "green",
+                  marginRight: 2,
+                }}
+              />
+              {skill}
+            </GreenSkillButton>
+          ))}
         </Skills>
         <Button>Apply</Button>
       </Card>

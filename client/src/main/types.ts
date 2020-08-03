@@ -1,8 +1,3 @@
-export interface Techs {
-  required: string[]
-  recommended: string[]
-}
-
 export enum State {
   WAITING = "WAITING",
   ACCEPTED = "APPROVED",
@@ -19,6 +14,8 @@ export interface JobPost {
   location: string
   published: string
   deadline?: string
+  requiredSkills: [string]
+  recommendedSkills: [string]
   link: string
   state: State
 }

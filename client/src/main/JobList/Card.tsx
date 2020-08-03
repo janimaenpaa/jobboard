@@ -4,6 +4,8 @@ import styled from "styled-components"
 import { JobPost } from "../types"
 import { device } from "../theme"
 import { toFormattedDate } from "../utils"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const Container = styled.div`
   display: flex;
@@ -84,7 +86,7 @@ const Content = styled.div`
 const Location = styled.div``
 const Published = styled.div``
 
-const Tech = styled.div`
+const Skill = styled.div`
   display: flex;
   flex-direction: row;
 `
@@ -102,6 +104,30 @@ const TechButton = styled.button`
     border-radius: 0;
   }
 `
+
+const GreenSkillButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-right: 0.4rem;
+`
+const BlueSkillButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: lightblue;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-right: 0.4rem;
+`
+
 const Card: React.FC<{ job: JobPost }> = ({ job }) => {
   if (job.state === "PINNED") {
     return (
@@ -112,12 +138,32 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
             <Title>{job.title}</Title>
             <Location>{job.location}</Location>
             <Published>Published: {toFormattedDate(job.published)}</Published>
-            <Tech>
-              <TechButton>MongoDB</TechButton>
-              <TechButton>Express</TechButton>
-              <TechButton>React</TechButton>
-              <TechButton>Node.js</TechButton>
-            </Tech>
+            <Skill>
+              {job.requiredSkills.map((skill) => (
+                <BlueSkillButton key={skill}>
+                  <CheckCircleIcon
+                    style={{
+                      fontSize: "1rem",
+                      color: "darkblue",
+                      marginRight: 2,
+                    }}
+                  />
+                  {skill}
+                </BlueSkillButton>
+              ))}
+              {job.recommendedSkills.map((skill) => (
+                <GreenSkillButton key={skill}>
+                  <ThumbUpIcon
+                    style={{
+                      fontSize: "1rem",
+                      color: "green",
+                      marginRight: 2,
+                    }}
+                  />
+                  {skill}
+                </GreenSkillButton>
+              ))}
+            </Skill>
           </Content>
         </PinnedContainer>
       </StyledLink>
@@ -132,12 +178,32 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
           <Title>{job.title}</Title>
           <Location>{job.location}</Location>
           <Published>Published: {toFormattedDate(job.published)}</Published>
-          <Tech>
-            <TechButton>MongoDB</TechButton>
-            <TechButton>Express</TechButton>
-            <TechButton>React</TechButton>
-            <TechButton>Node.js</TechButton>
-          </Tech>
+          <Skill>
+            {job.requiredSkills.map((skill) => (
+              <BlueSkillButton key={skill}>
+                <CheckCircleIcon
+                  style={{
+                    fontSize: "1rem",
+                    color: "darkblue",
+                    marginRight: 2,
+                  }}
+                />
+                {skill}
+              </BlueSkillButton>
+            ))}
+            {job.recommendedSkills.map((skill) => (
+              <GreenSkillButton key={skill}>
+                <ThumbUpIcon
+                  style={{
+                    fontSize: "1rem",
+                    color: "green",
+                    marginRight: 2,
+                  }}
+                />
+                {skill}
+              </GreenSkillButton>
+            ))}
+          </Skill>
         </Content>
       </Container>
     </StyledLink>
