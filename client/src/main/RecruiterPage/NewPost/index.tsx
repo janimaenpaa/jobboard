@@ -97,7 +97,14 @@ type FormData = {
 
 const NewPost: React.FC = () => {
   const { register, setValue, handleSubmit, errors } = useForm<FormData>()
-  const [editorValue, setEditorValue] = useState("")
+  const [editorValue, setEditorValue] = useState<string>("")
+  const [requiredSkill, setRequiredSkill] = useState<string>("")
+  const [requiredSkills, setRequiredSkills] = useState<string[]>([])
+  const [recommendedSkill, setRecommendedSkill] = useState<string>("")
+  const [recommendedSkills, setRecommendedSkills] = useState<string[]>([])
+
+  console.log(requiredSkill)
+  console.log(recommendedSkill)
 
   const [createPost] = useMutation(ADD_POST, {
     refetchQueries: [{ query: ALL_POSTS }],
@@ -120,6 +127,22 @@ const NewPost: React.FC = () => {
       },
     })
   })
+
+  const handleRequiredKeyPress = (event: any) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      setRequiredSkills([...requiredSkills, requiredSkill])
+      setRequiredSkill("")
+    }
+  }
+
+  const handleRecommendedKeyPress = (event: any) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      setRecommendedSkills([...recommendedSkills, recommendedSkill])
+      setRecommendedSkill("")
+    }
+  }
 
   const modules = {
     clipboard: {
@@ -161,7 +184,6 @@ const NewPost: React.FC = () => {
           <Label>Job Title</Label>
           <Input name="title" ref={register} />
           <Label>Job Description</Label>
-          {/* <Input name="description" ref={register} /> */}
           <div style={{ height: 190 }}>
             <ReactQuill
               theme="snow"
@@ -175,8 +197,26 @@ const NewPost: React.FC = () => {
         </FormCard>
         <FormCard>
           <CardHeader>Skills</CardHeader>
-          <Label>Add required or recommended skills for applicants</Label>
-          <Input name="skills" />
+          <Label>Add required skills for applicants</Label>
+          <Input
+            name="requiredSkill"
+            value={requiredSkill}
+            onChange={(event) => setRequiredSkill(event.target.value)}
+            onKeyPress={handleRequiredKeyPress}
+          />
+          {requiredSkills.map((skill) => (
+            <div key={skill}>{skill}</div>
+          ))}
+          <Label>Add recommended skills for applicants</Label>
+          <Input
+            name="recommendedSkill"
+            value={recommendedSkill}
+            onChange={(event) => setRecommendedSkill(event.target.value)}
+            onKeyPress={handleRecommendedKeyPress}
+          />
+          {recommendedSkills.map((skill) => (
+            <div key={skill}>{skill}</div>
+          ))}
         </FormCard>
         <FormCard>
           <CardHeader>Additional information</CardHeader>
