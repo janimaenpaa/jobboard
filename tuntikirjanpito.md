@@ -30,4 +30,7 @@
 | 30.7. | 2    | Alustavan muokkaustoiminnallisuuden lisääminen frontendiin                                                          |
 | 2.8.  | 3    | Hakutoiminnan lisäys frontendiin, datan sorttaus                                                                    |
 | 3.8.  | 4    | Backendiin uusien entityien lisääminen, entityien lisääminen käyttöliittymään ja lomakkeeseen, tyylien muokkaaminen |
-|  yht  | 59   |                                                                                                                     |
+| 4.8.  | 3    | Koodin refraktorointia                                                                                              |
+|       | 2    | Storybookiin tutustumista                                                                                           |
+|       | 2    | Storybookin conffaamista                                                                                            |
+|  yht  | 66   |                                                                                                                     |
