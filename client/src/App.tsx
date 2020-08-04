@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import "typeface-roboto"
-import "typeface-open-sans"
 import "typeface-lato"
 import "typeface-roboto-slab"
 
