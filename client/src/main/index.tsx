@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "./global"
 import { theme } from "./theme"
 import { ALL_POSTS } from "./queries"
+import { Container } from "./styles"
 
 import JobList from "./JobList"
 import JobView from "./JobView"
@@ -15,10 +16,17 @@ const Main: React.FC = () => {
   const [token, setToken] = useState(localStorage.getItem("recruiter-token"))
   const { error, loading, data } = useQuery(ALL_POSTS)
   const client = useApolloClient()
-  console.log(data)
 
   if (loading) {
     return <div>Loading...</div>
+  }
+
+  if (error) {
+    return (
+      <div>
+        {error.name}: {error.message}
+      </div>
+    )
   }
 
   const logout = () => {
@@ -26,7 +34,6 @@ const Main: React.FC = () => {
     localStorage.clear()
     client.resetStore()
   }
-  
 
   return (
     <Router>
@@ -34,14 +41,18 @@ const Main: React.FC = () => {
         <>
           <GlobalStyles />
           <NavBar title="JobBoard" token={token} logout={logout} />
-          <Switch>
-            <Route path="/post/:id" render={() => <JobView />} />
-            <Route
-              path="/recruiter"
-              render={() => <RecruiterPage setToken={setToken} token={token} />}
-            />
-            <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
-          </Switch>
+          <Container>
+            <Switch>
+              <Route path="/post/:id" render={() => <JobView />} />
+              <Route
+                path="/recruiter"
+                render={() => (
+                  <RecruiterPage setToken={setToken} token={token} />
+                )}
+              />
+              <Route path="/" render={() => <JobList jobs={data.allPosts} />} />
+            </Switch>
+          </Container>
         </>
       </ThemeProvider>
     </Router>

@@ -13,3 +13,10 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+`

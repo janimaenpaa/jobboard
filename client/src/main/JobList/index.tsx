@@ -1,45 +1,7 @@
 import React, { useState } from "react"
-import styled from "styled-components"
-
 import { JobPost } from "../types"
 import Card from "./Card"
-import { device } from "../theme"
-
-const Container = styled.div`
-  display: flex;
-  align-content: center;
-  flex-direction: column;
-  max-width: 60%;
-  margin: 1.5rem auto auto auto;
-
-  @media ${device.laptop} {
-    max-width: 80%;
-  }
-  @media ${device.tablet} {
-    max-width: 100%;
-`
-
-const Header = styled.h2`
-  margin: 0 8px;
-  font-weight: 900;
-  font-size: 2rem;
-`
-
-const SearchBar = styled.input`
-  border: none;
-  border-radius: 10px;
-  background-color: #dedede;
-  padding: 10px;
-  margin-top: 1rem;
-  outline: none;
-
-  &:focus {
-    background-color: #c7c7c7;
-  }
-
-  @media ${device.tablet} {
-    border-radius: 0px;
-`
+import { Container, Header, SearchBar } from "./styles"
 
 const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
   const [filter, setFilter] = useState<string>("")
@@ -55,7 +17,9 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
       return 0
     })
 
-  const nonFilteredJobs = sortedJobs().map((job) => <Card key={job.id} job={job} />)
+  const nonFilteredJobs = sortedJobs().map((job) => (
+    <Card key={job.id} job={job} />
+  ))
   const filteredJobs = sortedJobs().filter(
     (job) =>
       String(job.title).toLowerCase().includes(filter) ||
