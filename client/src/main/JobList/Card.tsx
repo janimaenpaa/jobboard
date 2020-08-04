@@ -1,8 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import styled from "styled-components"
 import { JobPost } from "../types"
-import { device } from "../theme"
 import { toFormattedDate } from "../utils"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
@@ -16,7 +13,6 @@ import {
   Location,
   Published,
   Skill,
-  TechButton,
   GreenSkillButton,
   BlueSkillButton,
 } from "./cardStyles"

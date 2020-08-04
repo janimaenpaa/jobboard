@@ -1,10 +1,16 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { JobPost } from "../../types"
 import { ALL_POSTS, DELETE_POST, ME } from "../../queries"
 import { toFormattedDate } from "../../utils"
+import {
+  Row,
+  Title,
+  Buttons,
+  EditButton,
+  DeleteButton,
+} from "./postColumnStyles"
 
 import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
@@ -14,52 +20,6 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import Slide from "@material-ui/core/Slide"
 import { TransitionProps } from "@material-ui/core/transitions"
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
-const Row = styled.tr`
-  width: 100%;
-`
-
-const Title = styled.div``
-
-const Buttons = styled.div``
-
-const EditButton = styled.button`
-  background-color: #49c0ff;
-  color: white;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 0;
-  width: 4.5rem;
-  padding: 4px 10px;
-  margin-left: 6px;
-  margin-top: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #1c8de9;
-  }
-`
-const DeleteButton = styled.button`
-  background-color: #c96185;
-  color: white;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 0;
-  width: 4.5rem;
-  padding: 4px 6px;
-  margin-left: 6px;
-  margin-top: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #bf1650;
-  }
-`
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },

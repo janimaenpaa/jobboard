@@ -1,91 +1,19 @@
 import React, { useState } from "react"
 import { useMutation } from "@apollo/client"
 import { useForm } from "react-hook-form"
-import styled from "styled-components"
 import { ADD_POST, ALL_POSTS } from "../../queries"
-import { device } from "../../theme"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`
-const Form = styled.form`
-  flex-direction: column;
-  margin-top: 2rem;
-  min-width: 50%;
-
-  @media ${device.laptopL} {
-    min-width: 75%;
-  }
-
-  @media ${device.tablet} {
-    min-width: 100%;
-  }
-`
-
-const FormCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  @media ${device.tablet} {
-    border-radius: 0px;
-  }
-`
-
-const Label = styled.label`
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-top: 10px;
-  color: black;
-  font-size: 1rem;
-  font-weight: 500;
-`
-
-const Input = styled.input`
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid black;
-  padding: 12px 15px;
-  font-size: 14px;
-  color: black;
-`
-
-const Button = styled.button`
-  display: block;
-  background: #bf1650;
-  color: white;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid white;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
-`
-const Header = styled.h2`
-  margin: 0 8px;
-  font-weight: 900;
-  font-size: 2rem;
-`
-const CardHeader = styled.h3`
-  margin: 0;
-  font-weight: 700;
-  font-size: 1.5rem;
-`
+import {
+  Container,
+  Button,
+  Form,
+  FormCard,
+  Label,
+  Input,
+  Header,
+  CardHeader,
+} from "./styles"
 
 type FormData = {
   title: string
@@ -102,9 +30,6 @@ const NewPost: React.FC = () => {
   const [requiredSkills, setRequiredSkills] = useState<string[]>([])
   const [recommendedSkill, setRecommendedSkill] = useState<string>("")
   const [recommendedSkills, setRecommendedSkills] = useState<string[]>([])
-
-  console.log(requiredSkill)
-  console.log(recommendedSkill)
 
   const [createPost] = useMutation(ADD_POST, {
     refetchQueries: [{ query: ALL_POSTS }],
@@ -184,7 +109,7 @@ const NewPost: React.FC = () => {
           <Label>Job Title</Label>
           <Input name="title" ref={register} />
           <Label>Job Description</Label>
-          <div style={{ height: 190 }}>
+          <div style={{ height: 200 }}>
             <ReactQuill
               theme="snow"
               value={editorValue}
