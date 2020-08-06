@@ -2,7 +2,13 @@ import React from "react"
 import { storiesOf } from "@storybook/react"
 import Card from "../main/components/Card"
 
-storiesOf("Card", module).add("default", () => (
+export default {
+  component: Card,
+  title: "Card",
+  description: "It's a card",
+}
+
+export const card = () => (
   <Card>
     <h2 style={{ margin: 0 }}>Hello World!</h2>
     <p>
@@ -15,4 +21,4 @@ storiesOf("Card", module).add("default", () => (
       est laborum.
     </p>
   </Card>
-))
+)
