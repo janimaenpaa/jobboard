@@ -33,4 +33,6 @@
 | 4.8.  | 3    | Koodin refraktorointia                                                                                              |
 |       | 2    | Storybookiin tutustumista                                                                                           |
 |       | 2    | Storybookin conffaamista                                                                                            |
-|  yht  | 66   |                                                                                                                     |
+| 6.8.  | 3    | Frontendin uuden komponentin luomista, storien tekemistä ja Storybookin conffausta                                  |
+| 7.8.  | 2    | Uusien komponenttejen ja storyien tekoa                                                                             |
+|  yht  | 71   |                                                                                                                     |
