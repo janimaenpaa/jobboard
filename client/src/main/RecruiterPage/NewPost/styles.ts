@@ -1,38 +1,11 @@
 import styled from "styled-components"
 import { device } from "../../theme"
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-`
 export const Form = styled.form`
   display: flex;
-  flex-direction: column;
-  width: 50%;
-
-  @media ${device.laptopL} {
-    min-width: 80%;
-  }
-
-  @media ${device.tablet} {
-    min-width: 100%;
-  }
-`
-
-export const FormCard = styled.div`
-  display: flex;
+  align-items: center;
   flex-direction: column;
   width: 100%;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-
-  @media ${device.tablet} {
-    border-radius: 0px;
-  }
 `
 
 export const Label = styled.label`

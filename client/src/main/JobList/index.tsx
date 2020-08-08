@@ -23,9 +23,15 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
   ))
   const filteredJobs = sortedJobs().filter(
     (job) =>
-      String(job.title).toLowerCase().includes(filter) ||
-      String(job.company).toLowerCase().includes(filter) ||
-      String(job.location).toLowerCase().includes(filter)
+      String(job.title)
+        .toLowerCase()
+        .includes(filter) ||
+      String(job.company)
+        .toLowerCase()
+        .includes(filter) ||
+      String(job.location)
+        .toLowerCase()
+        .includes(filter)
   )
 
   const displayFilteredJobs = () => {
@@ -37,7 +43,7 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
 
   return (
     <Container>
-      <Header>Listed jobs</Header>
+      <Header style={{ alignContent: "flex-start" }}>Listed jobs</Header>
       <SearchBar
         placeholder="Search for a position, company or city..."
         onChange={(event) => setFilter(event.target.value.toLowerCase())}

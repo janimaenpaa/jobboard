@@ -3,8 +3,6 @@ import { JobPost } from "../types"
 import { toFormattedDate } from "../utils"
 import Button from "../components/Button"
 import Card from "../components/Card"
-import CheckCircleIcon from "@material-ui/icons/CheckCircle"
-import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 import {
   Title,
   StyledLink,
@@ -14,6 +12,8 @@ import {
   Published,
   Skill,
 } from "./cardStyles"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const Job: React.FC<{ job: JobPost }> = ({ job }) => {
   if (job.state === "PINNED") {

@@ -9,15 +9,10 @@ const Card = styled.div`
   display: flex;
   flex-direction: row;
   background-color: white;
-  color: black;
   padding: 20px;
   border-radius: 10px;
   margin-top: 5rem;
   width: 60%;
-`
-const Container = styled.div`
-  min-width: 60%;
-  max-width: 100%;
 `
 
 const Signup = styled.div`
@@ -27,11 +22,7 @@ const Signup = styled.div`
 
 const View: React.FC<{ setToken: any; token: any }> = ({ setToken, token }) => {
   if (token) {
-    return (
-      <Container>
-        <PostManager />
-      </Container>
-    )
+    return <PostManager />
   }
 
   return (

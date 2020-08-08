@@ -5,7 +5,9 @@ import { JobPost } from "../../../types"
 import { FIND_POST } from "../../../queries"
 import { toFormattedDate } from "../../../utils"
 import { StyledLink } from "../../../styles"
-import { Card, Container, Header, Title } from "./styles"
+import { Header, Title } from "./styles"
+import Card from "../../../components/Card"
+import Container from "../../../components/Container"
 
 const PostEditor: React.FC = () => {
   const { id } = useParams()

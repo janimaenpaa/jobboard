@@ -6,11 +6,6 @@ import Signup from "./Signup"
 import NewPost from "./NewPost"
 import PostEditor from "./PostManager/PostEditor"
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
 const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
   setToken,
   token,
