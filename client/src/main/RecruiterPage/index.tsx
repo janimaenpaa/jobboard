@@ -17,7 +17,6 @@ const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
 }) => {
   let { path } = useRouteMatch()
   return (
-      <Container>
         <Switch>
           <Route path={`${path}/post/:id`} render={() => <PostEditor />} />
           <Route path={`${path}/signup`} render={() => <Signup />} />
@@ -27,7 +26,6 @@ const RecruiterPage: React.FC<{ setToken: any; token: any }> = ({
             render={() => <View setToken={setToken} token={token} />}
           />
         </Switch>
-      </Container>
   )
 }
 

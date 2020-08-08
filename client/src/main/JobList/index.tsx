@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { JobPost } from "../types"
-import Card from "./Card"
-import { Container, Header, SearchBar } from "./styles"
+import Job from "./Job"
+import { Header, SearchBar } from "./styles"
+import Container from "../components/Container"
 
 const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
   const [filter, setFilter] = useState<string>("")
@@ -18,7 +19,7 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
     })
 
   const nonFilteredJobs = sortedJobs().map((job) => (
-    <Card key={job.id} job={job} />
+    <Job key={job.id} job={job} />
   ))
   const filteredJobs = sortedJobs().filter(
     (job) =>
@@ -31,7 +32,7 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
     if (filteredJobs.length === 0) {
       return <div style={{ margin: "1rem auto" }}>No jobs found...</div>
     }
-    return filteredJobs.map((job) => <Card key={job.id} job={job} />)
+    return filteredJobs.map((job) => <Job key={job.id} job={job} />)
   }
 
   return (

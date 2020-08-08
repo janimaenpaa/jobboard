@@ -1,11 +1,11 @@
 import React from "react"
 import { JobPost } from "../types"
 import { toFormattedDate } from "../utils"
+import Button from "../components/Button"
+import Card from "../components/Card"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 import {
-  Container,
-  PinnedContainer,
   Title,
   StyledLink,
   Company,
@@ -13,15 +13,13 @@ import {
   Location,
   Published,
   Skill,
-  GreenSkillButton,
-  BlueSkillButton,
 } from "./cardStyles"
 
-const Card: React.FC<{ job: JobPost }> = ({ job }) => {
+const Job: React.FC<{ job: JobPost }> = ({ job }) => {
   if (job.state === "PINNED") {
     return (
-      <StyledLink to={`/post/${job.id}`}>
-        <PinnedContainer>
+      <Card type="PIN">
+        <StyledLink to={`/post/${job.id}`}>
           <Company>{job.company}</Company>
           <Content>
             <Title>{job.title}</Title>
@@ -29,7 +27,7 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
             <Published>Published: {toFormattedDate(job.published)}</Published>
             <Skill>
               {job.requiredSkills.map((skill) => (
-                <BlueSkillButton key={skill}>
+                <Button key={skill} color="lightblue">
                   <CheckCircleIcon
                     style={{
                       fontSize: "1rem",
@@ -38,10 +36,10 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
                     }}
                   />
                   {skill}
-                </BlueSkillButton>
+                </Button>
               ))}
               {job.recommendedSkills.map((skill) => (
-                <GreenSkillButton key={skill}>
+                <Button key={skill} color="lightgreen">
                   <ThumbUpIcon
                     style={{
                       fontSize: "1rem",
@@ -50,18 +48,18 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
                     }}
                   />
                   {skill}
-                </GreenSkillButton>
+                </Button>
               ))}
             </Skill>
           </Content>
-        </PinnedContainer>
-      </StyledLink>
+        </StyledLink>
+      </Card>
     )
   }
 
   return (
-    <StyledLink to={`/post/${job.id}`}>
-      <Container>
+    <Card type="HOVER">
+      <StyledLink to={`/post/${job.id}`}>
         <Company>{job.company}</Company>
         <Content>
           <Title>{job.title}</Title>
@@ -69,7 +67,7 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
           <Published>Published: {toFormattedDate(job.published)}</Published>
           <Skill>
             {job.requiredSkills.map((skill) => (
-              <BlueSkillButton key={skill}>
+              <Button key={skill} color="lightblue">
                 <CheckCircleIcon
                   style={{
                     fontSize: "1rem",
@@ -78,10 +76,10 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
                   }}
                 />
                 {skill}
-              </BlueSkillButton>
+              </Button>
             ))}
             {job.recommendedSkills.map((skill) => (
-              <GreenSkillButton key={skill}>
+              <Button key={skill} color="lightgreen">
                 <ThumbUpIcon
                   style={{
                     fontSize: "1rem",
@@ -90,13 +88,13 @@ const Card: React.FC<{ job: JobPost }> = ({ job }) => {
                   }}
                 />
                 {skill}
-              </GreenSkillButton>
+              </Button>
             ))}
           </Skill>
         </Content>
-      </Container>
-    </StyledLink>
+      </StyledLink>
+    </Card>
   )
 }
 
-export default Card
+export default Job
