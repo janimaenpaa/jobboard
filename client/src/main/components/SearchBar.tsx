@@ -4,7 +4,7 @@ import { device } from "../theme"
 
 export interface Props {
   placeholder?: string
-  onChange?: () => void
+  onChange?: any
 }
 
 const Bar = styled.input`

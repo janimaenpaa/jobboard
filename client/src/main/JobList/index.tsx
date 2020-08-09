@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { JobPost } from "../types"
 import Job from "./Job"
-import { Header, SearchBar } from "./styles"
 import Container from "../components/Container"
+import Header from "../components/Header"
+import SearchBar from "../components/SearchBar"
 
 const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
   const [filter, setFilter] = useState<string>("")
@@ -43,10 +44,10 @@ const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
 
   return (
     <Container>
-      <Header style={{ alignContent: "flex-start" }}>Listed jobs</Header>
+      <Header>Jobs</Header>
       <SearchBar
         placeholder="Search for a position, company or city..."
-        onChange={(event) => setFilter(event.target.value.toLowerCase())}
+        onChange={(event: any) => setFilter(event.target.value.toLowerCase())}
       />
       {filter.length === 0 ? nonFilteredJobs : displayFilteredJobs()}
     </Container>
