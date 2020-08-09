@@ -1,5 +1,12 @@
 import styled from "styled-components"
 
+export const ButtonContainer = styled.form`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+`
+
 export const Form = styled.form`
   display: flex;
   align-items: center;

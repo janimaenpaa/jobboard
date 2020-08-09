@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const StyledButton = styled.button<StyleProps>`
   display: flex;
@@ -12,6 +14,7 @@ const StyledButton = styled.button<StyleProps>`
   cursor: pointer;
   outline: none;
   padding: 8px;
+  margin-top: 0.4rem;
   margin-right: 0.4rem;
 `
 
@@ -20,6 +23,8 @@ export interface Props {
   onClick?: () => void
   color?: string
   textColor?: string
+  required?: boolean
+  recommended?: boolean
 }
 
 export interface StyleProps {
@@ -27,7 +32,44 @@ export interface StyleProps {
   textColor?: string
 }
 
-const Button: React.FC<Props> = ({ children, onClick, color, textColor }) => {
+const Button: React.FC<Props> = ({
+  children,
+  onClick,
+  color,
+  textColor,
+  required,
+  recommended,
+}) => {
+  if (required) {
+    return (
+      <StyledButton color="lightblue" onClick={onClick}>
+        <CheckCircleIcon
+          style={{
+            fontSize: "1rem",
+            color: "darkblue",
+            marginRight: 3,
+          }}
+        />
+        {children}
+      </StyledButton>
+    )
+  }
+
+  if (recommended) {
+    return (
+      <StyledButton color="lightgreen" onClick={onClick}>
+        <ThumbUpIcon
+          style={{
+            fontSize: "1rem",
+            color: "green",
+            marginRight: 3,
+          }}
+        />
+        {children}
+      </StyledButton>
+    )
+  }
+
   return (
     <StyledButton color={color} textColor={textColor} onClick={onClick}>
       {children}

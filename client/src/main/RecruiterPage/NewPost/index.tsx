@@ -4,7 +4,14 @@ import { useForm } from "react-hook-form"
 import { ADD_POST, ALL_POSTS } from "../../queries"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
-import { Button, Form, Label, Input } from "./styles"
+import {
+  Button as FormButton,
+  ButtonContainer,
+  Form,
+  Label,
+  Input,
+} from "./styles"
+import Button from "../../components/Button"
 import Card from "../../components/Card"
 import Container from "../../components/Container"
 import Header from "../../components/Header"
@@ -123,9 +130,13 @@ const NewPost: React.FC = () => {
             onChange={(event) => setRequiredSkill(event.target.value)}
             onKeyPress={handleRequiredKeyPress}
           />
-          {requiredSkills.map((skill) => (
-            <div key={skill}>{skill}</div>
-          ))}
+          <ButtonContainer>
+            {requiredSkills.map((skill) => (
+              <Button required key={skill}>
+                {skill}
+              </Button>
+            ))}
+          </ButtonContainer>
           <Label>Add recommended skills for applicants</Label>
           <Input
             name="recommendedSkill"
@@ -133,9 +144,13 @@ const NewPost: React.FC = () => {
             onChange={(event) => setRecommendedSkill(event.target.value)}
             onKeyPress={handleRecommendedKeyPress}
           />
-          {recommendedSkills.map((skill) => (
-            <div key={skill}>{skill}</div>
-          ))}
+          <ButtonContainer>
+            {recommendedSkills.map((skill) => (
+              <Button recommended key={skill}>
+                {skill}
+              </Button>
+            ))}
+          </ButtonContainer>
         </Card>
         <Card>
           <Header header="h3">Additional information</Header>
@@ -145,7 +160,7 @@ const NewPost: React.FC = () => {
           <Input name="deadline" ref={register} />
           <Label>Link for applying</Label>
           <Input name="link" ref={register} />
-          <Button type="submit">Submit</Button>
+          <FormButton type="submit">Submit</FormButton>
         </Card>
       </Form>
     </Container>
