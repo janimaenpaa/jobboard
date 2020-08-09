@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { device } from "../../theme"
 
 export const Form = styled.form`
   display: flex;
@@ -42,14 +41,4 @@ export const Button = styled.button`
   margin-top: 10px;
   font-size: 1.1rem;
   font-weight: 600;
-`
-export const Header = styled.h2`
-  margin: 0 1rem;
-  font-weight: 900;
-  font-size: 2rem;
-`
-export const CardHeader = styled.h3`
-  margin: 0;
-  font-weight: 700;
-  font-size: 1.5rem;
 `

@@ -12,7 +12,7 @@ const H3 = styled.h3`
   margin: 0;
   color: ${(props) => (props.color ? props.color : "black")};
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 `
 export interface Props {
   children: React.ReactNode
