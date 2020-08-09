@@ -6,25 +6,21 @@ import { FIND_POST } from "../queries"
 import { StyledLink } from "../styles"
 import { toFormattedDate } from "../utils"
 import {
-  Card,
   Company,
-  Container,
-  Title,
-  Header,
   Description,
-  Button,
-  BlueSkillButton,
-  GreenSkillButton,
+  Button as FormButton,
   Info,
   Skills,
 } from "./styles"
+import Button from "../components/Button"
+import Card from "../components/Card"
+import Container from "../components/Container"
+import Header from "../components/Header"
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
-import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import EventIcon from "@material-ui/icons/Event"
 import LocationCityIcon from "@material-ui/icons/LocationCity"
 import ScheduleIcon from "@material-ui/icons/Schedule"
-import ThumbUpIcon from "@material-ui/icons/ThumbUp"
 
 const JobView: React.FC = () => {
   const { id } = useParams()
@@ -39,7 +35,6 @@ const JobView: React.FC = () => {
   if (error) return <div>Error: {error}</div>
 
   const job: JobPost = data.findPost
-  console.log(job)
   return (
     <Container>
       <Card>
@@ -56,7 +51,7 @@ const JobView: React.FC = () => {
           {"Back"}
         </StyledLink>
         <Company>{job.company}</Company>
-        <Title>{job.title}</Title>
+        <Header header="h3">{job.title}</Header>
         <Info>
           <LocationCityIcon style={{ margin: 0 }} />
           {job.location} |
@@ -65,38 +60,26 @@ const JobView: React.FC = () => {
           <ScheduleIcon />
           {job.deadline ? `${job.deadline}` : "No deadline assigned"}
         </Info>
-        <Header>Description</Header>
+        <Header header="h3">Description</Header>
         <Description>
           <div dangerouslySetInnerHTML={{ __html: job.description }} />
         </Description>
-        <Header>Skills</Header>
+        <Header header="h3" marginTop="0.8rem">
+          Skills
+        </Header>
         <Skills>
           {job.requiredSkills.map((skill) => (
-            <BlueSkillButton key={skill}>
-              <CheckCircleIcon
-                style={{
-                  fontSize: "1rem",
-                  color: "darkblue",
-                  marginRight: 2,
-                }}
-              />
+            <Button required key={skill}>
               {skill}
-            </BlueSkillButton>
+            </Button>
           ))}
           {job.recommendedSkills.map((skill) => (
-            <GreenSkillButton key={skill}>
-              <ThumbUpIcon
-                style={{
-                  fontSize: "1rem",
-                  color: "green",
-                  marginRight: 2,
-                }}
-              />
+            <Button recommended key={skill}>
               {skill}
-            </GreenSkillButton>
+            </Button>
           ))}
         </Skills>
-        <Button>Apply</Button>
+        <FormButton>Apply</FormButton>
       </Card>
     </Container>
   )

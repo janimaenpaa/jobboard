@@ -5,7 +5,7 @@ import { JobPost } from "../../types"
 import PostTable from "./PostTable"
 import Card from "../../components/Card"
 import Container from "../../components/Container"
-import { Title, Header } from "./styles"
+import Header from "../../components/Header"
 
 const PostManager: React.FC = () => {
   const { error, loading, data } = useQuery(ME)
@@ -32,17 +32,17 @@ const PostManager: React.FC = () => {
     <Container>
       <Header>Manage Posts</Header>
       <Card>
-        <Title>Posts waiting to be approved</Title>
+        <Header header="h3">Posts waiting to be approved</Header>
         <PostTable {...waitingPosts} />
       </Card>
       {pinnedPosts.length > 0 && (
         <Card>
-          <Title>Pinned posts</Title>
+          <Header header="h3">Pinned posts</Header>
           <PostTable {...pinnedPosts} />
         </Card>
       )}
       <Card>
-        <Title>Approved posts</Title>
+        <Header header="h3">Approved posts</Header>
         <PostTable {...approvedPosts} />
       </Card>
     </Container>

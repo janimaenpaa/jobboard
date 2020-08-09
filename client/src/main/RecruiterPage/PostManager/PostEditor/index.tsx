@@ -1,13 +1,16 @@
 import React from "react"
+import styled from "styled-components"
 import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
 import { JobPost } from "../../../types"
 import { FIND_POST } from "../../../queries"
 import { toFormattedDate } from "../../../utils"
 import { StyledLink } from "../../../styles"
-import { Header, Title } from "./styles"
 import Card from "../../../components/Card"
 import Container from "../../../components/Container"
+import Header from "../../../components/Header"
+
+const Title = styled.div``
 
 const PostEditor: React.FC = () => {
   const { id } = useParams()
@@ -28,7 +31,7 @@ const PostEditor: React.FC = () => {
       <Header>{post.title}</Header>
       <Card>
         <StyledLink to="/recruiter">{"<="}</StyledLink>
-        <h3>Post information</h3>
+        <Header header="h3">Post information</Header>
         <Title>{post.title}</Title>
         <Title>{post.description}</Title>
         <Title>{toFormattedDate(post.published)}</Title>

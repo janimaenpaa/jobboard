@@ -64,26 +64,3 @@ export const Info = styled.div`
 export const Skills = styled.div`
   display: flex;
 `
-
-export const GreenSkillButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: lightgreen;
-  border: none;
-  border-radius: 6px;
-  outline: none;
-  padding: 8px;
-  margin-right: 0.4rem;
-`
-export const BlueSkillButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: lightblue;
-  border: none;
-  border-radius: 6px;
-  outline: none;
-  padding: 8px;
-  margin-right: 0.4rem;
-`
