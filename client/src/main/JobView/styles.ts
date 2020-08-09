@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { device } from "../theme"
 
 export const Company = styled.h3`
   margin: 1.5rem 0 0 0;
