@@ -1,40 +1,10 @@
 import styled from "styled-components"
 import { device } from "../theme"
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-export const Card = styled.div`
-  background-color: white;
-  border-radius: 10px;
-  margin: 0;
-  padding: 20px;
-  max-width: 60%;
-
-  @media ${device.laptop} {
-    max-width: 80%;
-  }
-  @media ${device.tablet} {
-    max-width: 100%;
-    border-radius: 0;
-`
-export const Title = styled.h2`
-  font-size: 1.5rem;
-  margin: 0 0 0 0;
-`
-
 export const Company = styled.h3`
   margin: 1.5rem 0 0 0;
   font-size: 1.1rem;
   color: gray;
-`
-
-export const Header = styled.h3`
-  margin: 1rem 0 0.4rem 0;
-  font-size: 1.2rem;
 `
 
 export const Description = styled.div`
