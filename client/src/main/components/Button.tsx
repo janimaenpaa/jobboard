@@ -7,6 +7,8 @@ const StyledButton = styled.button<StyleProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-family: Lato;
+  font-weight: 600;
   background: ${(props) => (props.color ? props.color : "#bf1650")};
   border: none;
   border-radius: 6px;

@@ -1,24 +1,9 @@
 import styled from "styled-components"
 import { device } from "../../theme"
 
-export const Container = styled.div`
-  align-content: center;
-  flex-direction: column;
-
-  @media ${device.laptop} {
-    max-width: 80%;
-  }
-  @media ${device.tablet} {
-    max-width: 100%;
-`
-
 export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
   width: 100%;
+  padding: 1rem;
 `
 
 export const Label = styled.label`

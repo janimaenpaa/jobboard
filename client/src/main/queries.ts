@@ -102,6 +102,31 @@ export const LOGIN = gql`
   }
 `
 
+export const SIGNUP = gql`
+  mutation signup(
+    $email: String!
+    $firstName: String!
+    $lastName: String!
+    $company: String!
+    $password: String!
+  ) {
+    createRecruiter(
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      company: $company
+      password: $password
+    ) {
+      id
+      email
+      firstName
+      lastName
+      company
+      posts
+    }
+  }
+`
+
 export const ME = gql`
   query {
     me {
