@@ -34,5 +34,8 @@
 |       | 2    | Storybookiin tutustumista                                                                                           |
 |       | 2    | Storybookin conffaamista                                                                                            |
 | 6.8.  | 3    | Frontendin uuden komponentin luomista, storien tekemistä ja Storybookin conffausta                                  |
-| 7.8.  | 2    | Uusien komponenttejen ja storyien tekoa                                                                             |
-|  yht  | 71   |                                                                                                                     |
+| 7.8.  | 3    | Uusien komponenttien ja storyien tekoa                                                                              |
+| 8.8.  | 3    | Komponenttien refraktorointia, uusien komponenttien tekoa                                                           |
+| 9.8.  | 3    | Komponenttien refraktorointia, uusien komponenttien tekoa, vanhojen komponenttien muokkaamista                      |
+| 10.8. | 2    | Frontendin mutaatioiden päivittämistä ja luomista, lomakkeiden päivittämistä                                        |
+|  yht  | 82   |                                                                                                                     |
