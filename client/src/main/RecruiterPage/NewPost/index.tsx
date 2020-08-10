@@ -50,6 +50,8 @@ const NewPost: React.FC = () => {
         location,
         deadline,
         link,
+        requiredSkills,
+        recommendedSkills
       },
     })
   })

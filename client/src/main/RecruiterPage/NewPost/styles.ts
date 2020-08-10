@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const ButtonContainer = styled.form`
+export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -57,6 +57,8 @@ export const ADD_POST = gql`
     $location: String!
     $deadline: String
     $link: String!
+    $requiredSkills: [String]
+    $recommendedSkills: [String]
   ) {
     addPost(
       title: $title
