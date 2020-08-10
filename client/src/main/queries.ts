@@ -122,7 +122,6 @@ export const SIGNUP = gql`
       firstName
       lastName
       company
-      posts
     }
   }
 `
