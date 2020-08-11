@@ -42,18 +42,5 @@ export const Published = styled.div``
 export const Skill = styled.div`
   display: flex;
   flex-direction: row;
-`
-
-export const TechButton = styled.button`
-  margin-right: 0.2rem;
-  background-color: lightgray;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  font-weight: 500;
-  color: white;
-
-  @media ${device.tablet} {
-    border-radius: 0;
-  }
+  flex-wrap: wrap;
 `
