@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { UserInputError } = require("apollo-server")
+const { isAdmin, isAuthenticated } = require("../permissions")
 
 const User = require("../models/User")
 
@@ -36,6 +37,24 @@ module.exports = {
       if (!user || !passwordMatches) {
         throw new UserInputError("Invalid email or password")
       }
+
+      const userForToken = {
+        email: user.email,
+        id: user._id,
+      }
+
+      return { token: jwt.sign(userForToken, process.env.SECRET) }
+    },
+    adminLogin: async (root, args) => {
+      const user = await User.findOne({ email: args.email })
+
+      const passwordMatches = await bcrypt.compare(args.password, user.password)
+
+      if (!user || !passwordMatches) {
+        throw new UserInputError("Invalid email or password")
+      }
+
+      isAdmin(user)
 
       const userForToken = {
         email: user.email,
