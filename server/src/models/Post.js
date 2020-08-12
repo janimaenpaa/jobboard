@@ -11,9 +11,9 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 2,
   },
-  recruiter: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Recruiter",
+    ref: "User",
   },
   description: {
     type: String,

@@ -1,4 +1,4 @@
 const postResolver = require("./postResolver")
-const recruiterResolver = require("./recruiterResolver")
+const userResolver = require("./userResolver")
 
-module.exports = [recruiterResolver, postResolver]
+module.exports = [userResolver, postResolver]

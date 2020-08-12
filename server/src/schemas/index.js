@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server")
-const recruiterSchema = require("./recruiterSchema")
+const userSchema = require("./userSchema")
 const postSchema = require("./postSchema")
 
 const linkSchema = gql`
@@ -11,4 +11,4 @@ const linkSchema = gql`
   }
 `
 
-module.exports = [linkSchema, recruiterSchema, postSchema]
+module.exports = [linkSchema, userSchema, postSchema]

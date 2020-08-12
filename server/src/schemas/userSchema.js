@@ -1,12 +1,18 @@
 const { gql } = require("apollo-server")
 
-const recruiterSchema = gql`
-  type Recruiter {
+const userSchema = gql`
+  enum Role {
+    ADMIN
+    USER
+  }
+
+  type User {
     id: ID!
     email: String!
     firstName: String!
     lastName: String!
     company: String!
+    roles: [Role!]!
     posts: [Post!]!
   }
 
@@ -15,22 +21,22 @@ const recruiterSchema = gql`
   }
 
   extend type Query {
-    recruiterCount: Int!
-    allRecruiters: [Recruiter!]!
-    recruiter(id: ID!): Recruiter!
-    me: Recruiter
+    userCount: Int!
+    allUsers: [User!]!
+    user(id: ID!): User!
+    me: User
   }
 
   extend type Mutation {
-    createRecruiter(
+    createUser(
       email: String!
       firstName: String!
       lastName: String!
       company: String!
       password: String!
-    ): Recruiter!
+    ): User!
     login(email: String!, password: String!): Token
   }
 `
 
-module.exports = recruiterSchema
+module.exports = userSchema

@@ -3,7 +3,7 @@ const { ApolloServer } = require("apollo-server")
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 
-const Recruiter = require("./models/Recruiter")
+const User = require("./models/User")
 
 const schemas = require("./schemas")
 const resolvers = require("./resolvers")
@@ -31,10 +31,10 @@ const server = new ApolloServer({
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith("bearer ")) {
       const decodedToken = jwt.verify(auth.substring(7), process.env.SECRET)
-      const currentRecruiter = await Recruiter.findById(
+      const currentUser = await User.findById(
         decodedToken.id
       ).populate("posts")
-      return { currentRecruiter }
+      return { currentUser }
     }
   },
   introspection: true,

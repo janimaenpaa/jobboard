@@ -13,7 +13,7 @@ const postSchema = gql`
     id: ID!
     title: String!
     company: String!
-    recruiter: Recruiter!
+    user: User!
     description: String!
     location: String!
     published: String!

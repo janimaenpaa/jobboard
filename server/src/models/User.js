@@ -23,6 +23,11 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  roles: {
+    type: String,
+    enum: ["USER", "ADMIN"],
+    default: "USER",
+  },
   posts: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,4 +36,4 @@ const schema = new mongoose.Schema({
   ],
 })
 
-module.exports = mongoose.model("Recruiter", schema)
+module.exports = mongoose.model("User", schema)
