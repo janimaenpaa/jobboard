@@ -17,22 +17,21 @@ module.exports = {
       const saltRounds = 10
       const passwordHash = await bcrypt.hash(args.password, saltRounds)
 
-      const user = new User({
-        ...args,
-        password: passwordHash,
-      })
+      try {
+        const user = new User({
+          ...args,
+          password: passwordHash,
+        })
 
-      return user.save().catch((error) => {
+        return user.save()
+      } catch (error) {
         throw new UserInputError(error.message, { invalidArgs: args })
-      })
+      }
     },
     login: async (root, args) => {
       const user = await User.findOne({ email: args.email })
 
-      const passwordMatches = await bcrypt.compare(
-        args.password,
-        user.password
-      )
+      const passwordMatches = await bcrypt.compare(args.password, user.password)
 
       if (!user || !passwordMatches) {
         throw new UserInputError("Invalid email or password")

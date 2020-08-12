@@ -12,7 +12,7 @@ const userSchema = gql`
     firstName: String!
     lastName: String!
     company: String!
-    roles: [Role!]!
+    role: Role!
     posts: [Post!]!
   }
 

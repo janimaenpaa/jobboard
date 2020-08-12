@@ -1,5 +1,6 @@
 const { AuthenticationError, UserInputError } = require("apollo-server")
 const Post = require("../models/Post")
+const { isAdmin, isAuthenticated } = require("../permissions")
 
 module.exports = {
   Query: {
@@ -24,9 +25,7 @@ module.exports = {
     addPost: async (root, args, context) => {
       const currentUser = context.currentUser
 
-      if (!currentUser) {
-        throw new AuthenticationError("Not authenticated")
-      }
+      isAuthenticated(currentUser)
 
       const parsedDescription = args.description
         .replace("<br>", "")
