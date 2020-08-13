@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { device } from "../theme"
 
 export const Title = styled.div`
   color: black;
