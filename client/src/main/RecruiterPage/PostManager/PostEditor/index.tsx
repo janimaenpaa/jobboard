@@ -6,9 +6,9 @@ import { JobPost } from "../../../types"
 import { FIND_POST } from "../../../queries"
 import { toFormattedDate } from "../../../utils"
 import { StyledLink } from "../../../styles"
-import Card from "../../../components/Card"
-import Container from "../../../components/Container"
-import Header from "../../../components/Header"
+import Card from "../../../../components/Card"
+import Container from "../../../../components/Container"
+import Header from "../../../../components/Header"
 
 const Title = styled.div``
 

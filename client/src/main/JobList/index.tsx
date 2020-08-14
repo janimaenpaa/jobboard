@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { JobPost } from "../types"
 import Job from "./Job"
-import Container from "../components/Container"
-import Header from "../components/Header"
-import SearchBar from "../components/SearchBar"
+import Container from "../../components/Container"
+import Header from "../../components/Header"
+import SearchBar from "../../components/SearchBar"
 
 const JobList: React.FC<{ jobs: JobPost[] }> = ({ jobs }) => {
   const [filter, setFilter] = useState<string>("")

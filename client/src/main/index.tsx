@@ -10,7 +10,7 @@ import { Container } from "./styles"
 import JobList from "./JobList"
 import JobView from "./JobView"
 import RecruiterPage from "./RecruiterPage"
-import NavBar from "./components/NavBar"
+import NavBar from "../components/NavBar"
 
 const Main: React.FC = () => {
   const [token, setToken] = useState(localStorage.getItem("recruiter-token"))

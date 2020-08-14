@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { StyledLink } from "../styles"
+import { StyledLink } from "../main/styles"
 
 interface Props {
   title: String

@@ -3,9 +3,9 @@ import { useMutation } from "@apollo/client"
 import { SIGNUP } from "../../queries"
 import { useForm } from "react-hook-form"
 import { Button, Form, Input, Label } from "./styles"
-import Card from "../../components/Card"
-import Container from "../../components/Container"
-import Header from "../../components/Header"
+import Card from "../../../components/Card"
+import Container from "../../../components/Container"
+import Header from "../../../components/Header"
 import { create } from "domain"
 
 type FormData = {

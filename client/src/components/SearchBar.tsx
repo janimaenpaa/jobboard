@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { device } from "../theme"
+import { device } from "../main/theme"
 
 export interface Props {
   placeholder?: string

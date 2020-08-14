@@ -1,6 +1,6 @@
 import React from "react"
 import { action } from "@storybook/addon-actions"
-import Button from "../main/components/Button"
+import Button from "../components/Button"
 import ScheduleIcon from "@material-ui/icons/Schedule"
 
 export default {

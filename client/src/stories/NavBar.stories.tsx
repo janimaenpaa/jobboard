@@ -1,7 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 import { storiesOf } from "@storybook/react"
-import NavBar from "../main/components/NavBar"
+import NavBar from "../components/NavBar"
 
 storiesOf("NavBar", module).add("NavBar when not logged in", () => (
   <Router>

@@ -11,10 +11,10 @@ import {
   Label,
   Input,
 } from "./styles"
-import Button from "../../components/Button"
-import Card from "../../components/Card"
-import Container from "../../components/Container"
-import Header from "../../components/Header"
+import Button from "../../../components/Button"
+import Card from "../../../components/Card"
+import Container from "../../../components/Container"
+import Header from "../../../components/Header"
 
 type FormData = {
   title: string

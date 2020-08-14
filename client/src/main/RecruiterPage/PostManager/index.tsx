@@ -3,9 +3,9 @@ import { useQuery } from "@apollo/client"
 import { ME } from "../../queries"
 import { JobPost } from "../../types"
 import PostTable from "./PostTable"
-import Card from "../../components/Card"
-import Container from "../../components/Container"
-import Header from "../../components/Header"
+import Card from "../../../components/Card"
+import Container from "../../../components/Container"
+import Header from "../../../components/Header"
 
 const PostManager: React.FC = () => {
   const { error, loading, data } = useQuery(ME)

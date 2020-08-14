@@ -1,8 +1,8 @@
 import React from "react"
 import { JobPost } from "../types"
 import { toFormattedDate } from "../utils"
-import Button from "../components/Button"
-import Card from "../components/Card"
+import Button from "../../components/Button"
+import Card from "../../components/Card"
 import {
   Title,
   StyledLink,

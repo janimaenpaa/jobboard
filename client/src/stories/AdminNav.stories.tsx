@@ -1,5 +1,5 @@
 import React from "react"
-import AdminNav from "../main/components/AdminNav"
+import AdminNav from "../components/AdminNav"
 
 export default {
   component: AdminNav,
