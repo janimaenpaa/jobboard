@@ -6,7 +6,7 @@ export const ALL_POSTS = gql`
       id
       title
       company
-      recruiter {
+      user {
         id
         email
         firstName
@@ -31,7 +31,7 @@ export const FIND_POST = gql`
       id
       title
       company
-      recruiter {
+      user {
         id
         email
         firstName
@@ -72,7 +72,7 @@ export const ADD_POST = gql`
       id
       title
       company
-      recruiter {
+      user {
         id
         email
         firstName
@@ -112,7 +112,7 @@ export const SIGNUP = gql`
     $company: String!
     $password: String!
   ) {
-    createRecruiter(
+    createUser(
       email: $email
       firstName: $firstName
       lastName: $lastName
