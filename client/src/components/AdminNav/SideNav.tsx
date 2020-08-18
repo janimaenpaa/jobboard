@@ -3,9 +3,11 @@ import styled from "styled-components"
 
 const Container = styled.div`
   display: flex;
+  position: fixed;
   height: 100vh;
   width: 18rem;
   background-color: white;
+  z-index: 98;
 `
 
 export interface Props {}
