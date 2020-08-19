@@ -5,8 +5,8 @@ import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "../main/global"
 import { theme } from "../main/theme"
 import AdminNav from "../components/AdminNav"
-import Dashboard from "./Dashboard"
 import Container from "../components/Container"
+import FrontView from "./FrontView"
 
 interface Props {}
 
@@ -16,17 +16,17 @@ const Wrapper = styled.div`
 `
 
 const Admin = (props: Props) => {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem("user-token"))
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <>
           <GlobalStyles />
           <Wrapper>
-            <AdminNav />
+            <AdminNav token={token} />
             <Container>
               <Switch>
-                <Route path="/" render={() => <Dashboard />} />
+                <Route path="/" render={() => <FrontView token={token} />} />
               </Switch>
             </Container>
           </Wrapper>

@@ -2,11 +2,15 @@ import React from "react"
 import TopNav from "./TopNav"
 import SideNav from "./SideNav"
 
-const AdminNav = () => {
+export interface Props {
+  token?: string | null
+}
+
+const AdminNav: React.FC<Props> = ({ token }) => {
   return (
     <div>
       <TopNav title="JobBoard" miniTitle="Admin" />
-      <SideNav />
+      {token && <SideNav />}
     </div>
   )
 }
